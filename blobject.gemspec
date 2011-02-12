@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "blobject.gemspec",
     "lib/blobject.rb",
     "test/helper.rb",
     "test/test_blobject.rb"
