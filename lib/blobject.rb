@@ -1,3 +1,7 @@
+def blobject *parameters, &block
+  Blobject.new *parameters, &block
+end
+
 # similar to OpenStruct
 # b.foo.bar = 8 automatically creates a blobject called "foo" on "b"
 # to check whether a variable is defined use the '?' syntax i.e: b.is_it_here? => nil, b.foo? == b.foo
@@ -25,10 +29,20 @@ public
     unfreeze
   end
   
-  def initialize hash_of_initial_values={}
+  def initialize hash_of_initial_values_or_an_object={}, array_of_methods_to_copy_data_from_object=[]
      @values = {}
-     merge_hash hash_of_initial_values
-     yield self if block_given?
+     
+     if (hash_of_initial_values_or_an_object.class == Hash)
+       merge_hash hash_of_initial_values_or_an_object
+     else
+       array_of_methods_to_copy_data_from_object.each do |accessor|
+         @values[accessor.to_s] = hash_of_initial_values_or_an_object.send accessor
+       end
+     end     
+     
+     if block_given?
+       yield self
+     end 
      self
   end
   
@@ -46,7 +60,9 @@ public
       @values[assignment.to_s] = args[0]
     else
       # return the value or a new blobject
-      return @values[str] unless @values[str].nil?
+      value = @values[str]
+      
+      return value unless value.nil?
       return nil if frozen?
       @values[str] = Blobject.new
       return @values[str]      
@@ -66,7 +82,7 @@ public
         value = Blobject.blobjectify_array value
       end
       
-      @values[key] = value
+      @values[key.to_s] = value
     end 
     self
   end  
@@ -136,6 +152,20 @@ public
   end
   
   def blank?
-    @values.blank?
+    empty?
   end
+  
+  def empty?
+    @values.empty? || @values.values.empty? || !@values.values.any? do |v|
+      # if the value is a Blobject, Hash or Array return
+      # true if it is not empty.
+      # else just return true, the value is regarded as not empty.
+      if [Blobject, Array, Hash].include?(v.class) 
+        !v.empty?
+      else
+        true
+      end
+    end
+  end
+
 end
