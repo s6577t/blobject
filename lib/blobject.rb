@@ -2,14 +2,14 @@ Dir["#{File.dirname __FILE__}/blobject/*.rb"].each {|file| require "#{file}" }
 
 def blobject *parameters, &block
   Blobject.new *parameters, &block
-end
+end 
 
 # similar to OpenStruct
 # b.foo.bar = 8 automatically creates a blobject called "foo" on "b"
 # to check whether a variable is defined use the '?' syntax i.e: b.is_it_here? => nil, b.foo? == b.foo
 # calling an unassigned member returns a new blobject unless the blobject is frozen
 # a frozen blobject cannot be assigned new members or populated from a hash 
-# does no cycle checking, intended for use in serialization
+# does no cycle checking, intended for use in serialization          
 class Blobject
   class AssignToFrozenBlobjectException < Exception; end
   
@@ -49,6 +49,8 @@ public
   end
   
   def method_missing(sym, *args, &block)
+    # fixes for ruby 1.9.2, otherwise blobjects can't be used in arrays that may have the flatten method called
+    super if [:to_ary].include? sym
     
     str = sym.to_s
     
@@ -61,7 +63,7 @@ public
       raise AssignToFrozenBlobjectException if @blobject_frozen
       @values[assignment.to_s] = args[0]
     else
-      # return the value or a new blobject
+      #return the value or a new blobject
       value = @values[str]
       
       return value unless value.nil?
@@ -103,7 +105,7 @@ public
     h
   end
   
-  # builds a hash for json conversion
+  #builds a hash for json conversion
   def as_json *ps
     to_hash
   end
@@ -159,9 +161,9 @@ public
   
   def empty?
     @values.empty? || @values.values.empty? || !@values.values.any? do |v|
-      # if the value is a Blobject, Hash or Array return
-      # true if it is not empty.
-      # else just return true, the value is regarded as not empty.
+      #if the value is a Blobject, Hash or Array return
+      #true if it is not empty.
+      #else just return true, the value is regarded as not empty.
       if [Blobject, Array, Hash].include?(v.class) 
         !v.empty?
       else
@@ -169,5 +171,5 @@ public
       end
     end
   end
-
-end
+  
+end    

@@ -1,3 +1,3 @@
-module Blobject
+class Blobject
   VERSION = "0.1.2"
 end
