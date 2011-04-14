@@ -1,12 +1,14 @@
-# blobject
+![](https://github.com/sjltaylor/blobject/raw/master/blobject.png)
+
+# Blobject
 
 Blobject provides a free flowing syntax for creating blobs of data.
 
 ## Examples
 
-### creating a blobject
+### Creating a Blobject
 
-#### basic usage 
+#### Basic usage 
 	b = Blobject.new
 	
 	b.name.first = 'Rick'
@@ -14,7 +16,7 @@ Blobject provides a free flowing syntax for creating blobs of data.
 	
 	b.url = 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
 	
-#### with a block
+#### With a block
 	b = Blobject.new do |b|
 
 		b.name.first = 'Rick'
@@ -23,13 +25,13 @@ Blobject provides a free flowing syntax for creating blobs of data.
 		b.url = 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
 	end
 
-#### with a hash
+#### With a hash
 	b = Blobject.new :name => {:first => 'Rick', :last => 'Astley'}, :url => 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
 	
-#### with selected members of an existing object
+#### With selected members of an existing object
 	b = Blobject.new existing_object, [:name, :url]
 
-#### with the global shortcut method
+#### With the global shortcut method
 	b = blobject do |b|
  		b.name.first = 'Rick'
 		b.name.last = 'Astley'
@@ -39,13 +41,13 @@ Blobject provides a free flowing syntax for creating blobs of data.
 
 all of the above initialisation methods can be used in this way too.	    
 
-### object graph can be as complex as necessary
- b = blobject
- b.very.deep.nesting.of.objects = 2
+### Object graphs can be as complex as necessary
+  b = blobject
+  b.very.deep.nesting.of.objects = 2
 
 The intermediary blobjects are created automagically
 
-### check for the existence of a member
+### Check for the existence of a member
 	b = blobject
 	b.name = 'Rick'
 	b.url?
@@ -53,7 +55,7 @@ The intermediary blobjects are created automagically
 	b.name?
 	=> true
 	
-### overrides ruby freeze and unfreeze
+### Overrides ruby freeze and unfreeze
 The freeze method prevents the blobject from being extended or changed. 
 	
 	b = blobject do |b|
@@ -71,7 +73,7 @@ The freeze method prevents the blobject from being extended or changed.
 	b.name = 'hello'
 	=> Exception!
 	
-### empty? and blank? 
+### `empty?` and `blank?` 
   b = blobject
 	b.empty? && b.blank?
 	=> true
@@ -108,7 +110,17 @@ Blobjects are intended for de/serialization, therefore cycles in the object grap
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-## Copyright
+## License
+
+(The MIT License)
+
+Copyright © 2011 [Sam Taylor](http://sjltaylor.com/)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Copyright (c) 2011 Sam Taylor. See LICENSE.txt for
 further details.

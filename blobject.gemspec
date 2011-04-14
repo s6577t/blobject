@@ -8,9 +8,9 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Sam Taylor"]
   s.email       = ["sjltaylor@gmail.com"]
-  s.homepage    = "http://sjltaylor.com"
-  s.summary     = %q{fluent serializable object builder}
-  #s.description = %q{TODO: Write a gem description}
+  s.homepage    = "https://github.com/sjltaylor/blobject"
+  s.summary     = %q{serializable object builder}
+  s.description = %q{Blobject provides a free flowing syntax for creating blobs of data.}
 
   s.rubyforge_project = "blobject"
   
