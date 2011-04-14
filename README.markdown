@@ -1,6 +1,6 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/blobject.png)
 
-Provides a free flowing syntax for creating blobs of data.
+Provides a fluent to create blobs of data for views, JSON etc.
 
 ## Examples
 
