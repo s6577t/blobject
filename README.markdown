@@ -95,7 +95,7 @@ The freeze method prevents the blobject from being extended or changed.
 Intended for use to create view models which can be encoded to JSON with ActiveSupport::JSON.encode
 JSON can be unmarshalled into a blobject (recursively) with `Blobject.from_json json_string`
 
-Blobjects are intended for de/serialization and there for the cycles in the object graph will lead to a non terminating thread.
+Blobjects are intended for de/serialization, therefore cycles in the object graph will lead to a non terminating thread.
 
 
 ## Contributing to blobject
