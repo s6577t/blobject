@@ -1,8 +1,6 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/blobject.png)
 
-# Blobject
-
-Blobject provides a free flowing syntax for creating blobs of data.
+Provides a free flowing syntax for creating blobs of data.
 
 ## Examples
 
