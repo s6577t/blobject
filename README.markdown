@@ -40,7 +40,8 @@ Provides a free flowing syntax for creating blobs of data.
 all of the above initialisation methods can be used in this way too.	    
 
 ### Object graphs can be as complex as necessary
-  b = blobject
+  
+	b = blobject
   b.very.deep.nesting.of.objects = 2
 
 The intermediary blobjects are created automagically
