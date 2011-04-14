@@ -72,8 +72,9 @@ The freeze method prevents the blobject from being extended or changed.
 	b.name = 'hello'
 	=> Exception!
 	
-### `empty?` and `blank?` 
-  b = blobject
+### empty? and blank? 
+  
+	b = blobject
 	b.empty? && b.blank?
 	=> true
 	b.number = 123
