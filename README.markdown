@@ -1,4 +1,4 @@
-= blobject
+# blobject
 
 Blobject is for building untyped blobs of data.
 
