@@ -42,7 +42,7 @@ all of the above initialisation methods can be used in this way too.
 ### Object graphs can be as complex as necessary
   
 	b = blobject
-  b.very.deep.nesting.of.objects = 2
+	b.very.deep.nesting.of.objects = 2
 
 The intermediary blobjects are created automagically
 
