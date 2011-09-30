@@ -100,7 +100,11 @@ to find out if a blobject already has a member:
 
 ## Load JSON and YAML from a file
 
-  blobject_file = Blobject.read('path/to/file')
+  `blobject_file = Blobject.read('path/to/file.json')`
+  
+  
+Supported extensions: `yml`, `yaml`, `json`, `js`
+  
 
 ## Limitations
 
