@@ -93,7 +93,19 @@ class Blobject
   end
   
   def [] key
-    @hash[key]
+    @hash[key.to_s.to_sym]
+  end
+  
+  def keys
+    @hash.keys
+  end
+  
+  def values
+    @hash.values
+  end
+  
+  def each &block
+    return @hash.each &block
   end
   
   def []= key, value
@@ -101,7 +113,7 @@ class Blobject
   end
   
   def dup
-    Blobject.new Marshal.load(Marshal.dump(@hash))
+    Marshal.load(Marshal.dump(self))
   end
   
   def to_hash
@@ -142,9 +154,9 @@ class Blobject
   
   def self.read path
     case File.extname(path).downcase
-    when /\.yml/
+    when /\.y(a)?ml$/
       from_yaml File.read(path)
-    when /\.js(on)?/
+    when /\.js(on)?$/
       from_json File.read(path)
     else
       raise "Cannot handle file format of #{path}"

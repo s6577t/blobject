@@ -1,103 +1,110 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/blobject.png)
+Takes the pain out of data handling
 
-## Takes the pain out of 
+## Usage
 
-## Examples
+This is how you could use blobject to present a model for a JSON api call
 
-### Creating a Blobject
+    def present(model)
+    	  blobject do
+    	    name.first model.first_name
+    	    name.last model.last_name
+    	    url 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    	  end
+    end
 
-#### Basic usage 
-	b = Blobject.new
+If the were more calls in the 'name' namespace it might be more convenient to do
+
+    def present(model)
+      blobject do
+        name do
+          first model.first_name
+          middle model.middle_name if model.has_middle_name?
+          last model.last_name
+        end
+        url 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
+      end
+    end
+
+In each case, a blobject is returned that can be used like a normal object, or a hash
+
+    b = present(model)
+    b.name.first
+      => 'Barry'
+    b.name.has_middle?
+      => true
+    b[:url] # could also pass a string, blobject isn't a key fascist
+      => "http://www.youtube.com/watch?v=dQw4w9WgXcQ"
+
+blobjects can be modified as follows
+
+    b.modify do
+      number 172367
+    end
+
+They can be as complex/deep as required
+
+    b = blobject do
+      deep.nested.member.ofa.very.complex.thing 'HELLO WORLD'
+    end
+    
+    b.deep.nested.member.ofa.very.complex.thing
+      => 'HELLO WORLD'
+      
+
+
 	
-	b.name.first = 'Rick'
-	b.name.last = 'Astley'
-	
-	b.url = 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
-	
-#### With a block
-	b = Blobject.new do |b|
+## Creation options
 
-		b.name.first = 'Rick'
-		b.name.last = 'Astley'
+You can call blobject or Blobject.new with a hash to prefill it with data
 
-		b.url = 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
-	end
+    b = blobject :name => {:first => 'Barry'}
+    b.name.first
+      => 'Barry'
+    
+    b.modify { name.last 'McDoogle' }
+    b.name.last
+      => 'McDoogle'
 
-#### With a hash
-	b = Blobject.new :name => {:first => 'Rick', :last => 'Astley'}, :url => 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
-	
-#### With selected members of an existing object
-	b = Blobject.new existing_object, [:name, :url]
+`blobject *params` is simply an alias for `Blobject.new *params`
 
-#### With the global shortcut method
-	b = blobject do |b|
- 		b.name.first = 'Rick'
-		b.name.last = 'Astley'
+## Checking for members
 
-		b.url = 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
-	end
+to find out if a blobject already has a member:
 
-all of the above initialisation methods can be used in this way too.	    
+    b = blobject
+    
+    b.has_name?
+      => false
+    
+    b.modify do
+      has_name?
+        => false
+      name 'Jim'
+      has_name?
+        => true
+    end
+    
+    b.has_name?
+      => true
 
-### Object graphs can be as complex as necessary
-  
-	b = blobject
-	b.very.deep.nesting.of.objects = 2
+## Behaves like a hash
 
-The intermediary blobjects are created automagically
+* `#keys` returns all of the available keys
+* `#values` returns all of the available keys
+* `#each` enumerator of key, value pairs
+* `#[]` can be used for access to members, similarly `#[]=` can be used for assignment inside or outside of the modify block
+* `#dup` performs `Marshal.load(Marshal.dump(self))` for a deep copy
+* `#empty?` returns true if there are no members, false otherwise
+* `#to_yaml` and `#to_json`
 
-### Check for the existence of a member
-	b = blobject
-	b.name = 'Rick'
-	b.url?
-	=> false
-	b.name?
-	=> true
-	
-### Overrides ruby freeze and unfreeze
-The freeze method prevents the blobject from being extended or changed. 
-	
-	b = blobject do |b|
- 		b.name.first = 'Rick'
-		b.name.last = 'Astley'
+## Load JSON and YAML from a file
 
-		b.url = 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
-	end.freeze
-	b.frozen?
-	=> true
-	b.am_i_here 
-	=> nil
-	b.name?
-	=> true
-	b.name = 'hello'
-	=> Exception!
-	
-### empty? and blank? 
-  
-	b = blobject
-	b.empty? && b.blank?
-	=> true
-	b.number = 123
-	b.empty? || b.blank?
-	=> false
-	          
-## Feature summary
+  blobject_file = Blobject.read('path/to/file')
 
-* call a chain of methods and build an object graph automagically
-* check the existence of a member with 'method?'
-* overrides ruby freeze
-* recursively parses blobjects from json strings
-* can be initialized with...
-** an object and list of accessors to copy
-** a hash
-** a block
+## Limitations
 
-## Intended usage and limitations
-
-Intended for use to create view models which can be encoded to JSON with ActiveSupport::JSON.encode
-JSON can be unmarshalled into a blobject (recursively) with `Blobject.from_json json_string`
-
-Blobjects are intended for de/serialization, therefore cycles in the object graph will lead to a non terminating thread.
+Blobjects are intended for de/serialization; cyclic object graphs will cause havoc
 
 
 ## Contributing to blobject

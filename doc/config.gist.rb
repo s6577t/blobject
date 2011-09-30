@@ -5,11 +5,13 @@ MyApplication::Config = ->(config_path) do
 
     fsevent = FSEvent.new
     fsevent.watch config_path do
-      
+      suppress_warnings do
+        MyApplication::Config = Blobject.read(config_path)
+      end
     end
     fsevent.run
   else
     
-  Blobject.from_yaml(File.read(config_path))
-  
-end.('config/config.yaml')
+  MyApplication::Config = Blobject.read(config_path)
+
+end.('config/config.yml')
