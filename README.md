@@ -88,6 +88,13 @@ to find out if a blobject already has a member:
     b.has_name?
       => true
 
+## Usage Gists
+
+* [in the controller](https://gist.github.com/1254399)
+
+* [for configuration files](https://gist.github.com/1254403)
+
+
 ## Behaves like a hash
 
 * `#keys` returns all of the available keys
