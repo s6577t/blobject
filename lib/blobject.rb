@@ -1,4 +1,5 @@
 require 'blobject/version'
+require 'json'
 
 def blobject *parameters, &block
   Blobject.new *parameters, &block
@@ -99,8 +100,24 @@ class Blobject
     send key, value
   end
   
+  def dup
+    Blobject.new Marshal.load(Marshal.dump(@hash))
+  end
+  
   def to_hash
-    Marshal.load(Marshal.dump(@hash))
+    hash = @hash
+    
+    hash.each do |key, value|
+      hash[key] = value.to_hash if (value.instance_of? Blobject)
+      
+      if value.instance_of? Array
+        hash[key] = value.map do |v|
+          v.instance_of?(Blobject) ? v.to_hash : v
+        end
+      end
+    end
+    
+    hash
   end
   
   def from_hash hash
@@ -108,7 +125,7 @@ class Blobject
   end
   
   def to_yaml *params
-    @hash.to_yaml *params
+    to_hash.to_yaml *params
   end
   
   def self.from_yaml yaml
@@ -123,6 +140,17 @@ class Blobject
     __blobjectify__ JSON.load(json)
   end
   
+  def self.read path
+    case File.extname(path).downcase
+    when /\.yml/
+      from_yaml File.read(path)
+    when /\.js(on)?/
+      from_json File.read(path)
+    else
+      raise "Cannot handle file format of #{path}"
+    end
+  end
+  
   def dup
     Blobject.new to_hash
   end
@@ -130,8 +158,6 @@ class Blobject
   def inspect
     @hash.inspect
   end
-
-  
 
 protected
   
@@ -155,11 +181,11 @@ protected
     obj
   end 
   
-  def __r_modify_set__ modifying
-    @modifying = modifying
+  def __r_modify_set__ v
+    @modifying = v
     @hash.values.each do |child|
       if child.class <= Blobject
-        child.__r_modify_set__ modifying
+        child.__r_modify_set__ v
       end
     end
   end
