@@ -34,13 +34,10 @@ class Blobject
   
   def method_missing sym, *params, &block
     
-    if match = /^has_(?<name>.+)\?/.match(sym)
-      return @hash.has_key? match[:name].to_sym
+    if match = /^has_(.+)\?/.match(sym)
+      return @hash.has_key? match[1].to_sym
     end
     
-    modify_getter = -> { params.length == 0 && @modifying }
-    modify_assign = -> { params.length == 1 && @modifying }
-        
     if @modifying
       
       case params.length
