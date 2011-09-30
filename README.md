@@ -1,5 +1,7 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/blobject.png)
-Takes the pain out of data handling
+
+
+Takes some pain out of data handling
 
 ## Usage
 
