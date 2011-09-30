@@ -43,7 +43,12 @@ class Blobject
       
       case params.length
       when 0 # get
-        return @hash[sym] if @hash.has_key? sym
+        value = @hash[sym] 
+        
+        if value
+          value.modify(&block) if block_given? and value.instance_of?(Blobject)
+          return value
+        end
         
         child = Blobject.new
         parent = self
