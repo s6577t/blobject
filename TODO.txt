@@ -1,31 +1,7 @@
-Should it be a Basic Object?
-
-> DSL for INSIDE modify blocks
-> normal blobject.member= is usable outside modify blocks
-> usage syntax
->> modify block
-> works like hash which always symbolizes keys
->> [], merge
-> has_<name>?
-> freeze/defrost/frozen
-
-> to_yaml
-> to_json
->> Clean on serialize
-> save ?format
-> load ?format
-
-> recursively blobjectifies when loading yaml/json
-
-class A < Blobject
-  [[r]?[allow|prohibit]] :this, :that, :the_other
-end
-> filtering
-> recursive
-
 
 EXAMPLES
   > to/from yaml
+  > with controller params
   > JSON response
   > DSL
   > Config
@@ -39,12 +15,6 @@ EXAMPLES
 
 EXTRAS:
 
-explore what other hash-like functionality we can duplicate
-
-load_config, monitor for changes
+> load_config, monitor for changes
 
 automatically handle json request params into blobjects
-
-does it work with y, j and jj ???
-
-global method blobejct

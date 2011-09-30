@@ -15,9 +15,8 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "blobject"
   
   
-  s.add_development_dependency 'shoulda'
   s.add_development_dependency 'rspec'
-  s.add_development_dependency 'ruby-debug'
+  s.add_development_dependency 'ruby-debug19'
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
