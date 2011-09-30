@@ -1,8 +1,6 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/blobject.png)
 
 
-Takes some pain out of data handling
-
 ## Usage
 
 This is how you could use blobject to present a model for a JSON api call
