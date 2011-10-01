@@ -82,6 +82,11 @@ describe Blobject do
     it 'should allow for nested modification blocks' do
       
       blobject.modify do
+        
+        name.middle = 'mittens' 
+        
+        # makes sure that previously assigned members can be modified with a block
+        
         name do
           first 'barry'
           last 'mcdoodle'
