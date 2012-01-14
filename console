@@ -1,0 +1,7 @@
+#! /usr/bin/env ruby
+
+require 'ruby-debug' if ARGV.delete 'debug'
+require './lib/blobject'
+require 'irb'
+
+IRB.start
