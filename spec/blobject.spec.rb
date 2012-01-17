@@ -46,6 +46,17 @@ describe Blobject do
       assert b.respond_to?(:name?)
     end
 
+    it 'should return true if a prohibited attribute name is a defined method' do
+      def b.to_ary
+        123
+      end
+      assert b.respond_to? :to_ary
+    end
+
+    it 'should return false if the methods ends with a !' do
+      refute b.respond_to? :hello!
+    end
+
     it 'returns true if the blobject has no corresponding member' do
       b.name = 'jim'
       assert b.respond_to?(:name)

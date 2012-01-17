@@ -1,4 +1,5 @@
 require 'json'
+require 'yaml'
 require_relative 'blobject/version'
 
 def blobject hash={}, &block
@@ -6,6 +7,9 @@ def blobject hash={}, &block
 end
 
 class Blobject
+  # filter :to_ary else Blobject#to_ary returns a
+  # blobject which is not cool, especially if you are puts.
+  ProhibitedNames = [:to_ary]
 
   module Error; end
 
@@ -47,9 +51,8 @@ class Blobject
   end
 
   def method_missing method, *params, &block
-    # filter :to_ary else Blobject#to_ary returns a
-    # blobject which is not cool, especially if you are puts.
-    __tag_and_raise__ NoMethodError.new(method) if method == :to_ary
+
+    __tag_and_raise__ NoMethodError.new(method) if ProhibitedNames.include?(method)
 
     case
     # assignment in conditionals is usually a bad smell, here it helps minimize regex matching
@@ -90,13 +93,33 @@ class Blobject
   end
 
   def respond_to? method
-    method != :to_ary
+    return true if self.methods.include?(method)
+    return false if ProhibitedNames.include?(method)
+
+    method = method.to_s
+
+    [/^(\w+)=$/, /^(\w+)\?$/, /^\w+$/].any? do |r|
+      r.match(method)
+    end
+  end
+
+  def == other
+    return @hash == other.hash if other.class <= Blobject
+    super
   end
 
   def freeze
     __visit_subtree__ { |name, node| node.freeze }
     @hash.freeze
     super
+  end
+
+  def to_json
+    to_hash.to_json
+  end
+
+  def to_yaml
+    to_hash.to_yaml
   end
 
   def self.from_json json

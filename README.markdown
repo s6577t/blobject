@@ -1,5 +1,9 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/blobject.png)
 
+![](https://github.com/sjltaylor/blobject/raw/master/blob_defn.png)
+
+## Motivation
+
 -> Blobject. So natural it could only have been done in Ruby
 -> Blobject learns what you data structure looks like and defines the shape of objects on the fly
 -> definition of 'Blob'
