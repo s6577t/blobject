@@ -14,10 +14,10 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "blobject"
   
-  
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'minitest-reporters'
-  s.add_development_dependency 'ruby-debug19'
+  s.add_development_dependency 'pry'
+  s.add_development_dependency 'debugger'
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

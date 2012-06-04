@@ -2,6 +2,6 @@
 
 require 'ruby-debug' if ARGV.delete 'debug'
 require './lib/blobject'
-require 'irb'
+require 'pry'
 
-IRB.start
+Pry.start

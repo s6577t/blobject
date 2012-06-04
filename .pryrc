@@ -1,5 +1,5 @@
 $:.push File.expand_path('../lib', __FILE__)
-require 'ruby-debug'
+require 'debugger'
 require 'blobject'
 
 def reload!

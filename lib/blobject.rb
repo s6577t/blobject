@@ -2,10 +2,6 @@ require 'json'
 require 'yaml'
 require_relative 'blobject/version'
 
-def blobject hash={}, &block
-  Blobject.new hash, &block
-end
-
 class Blobject
   # filter :to_ary else Blobject#to_ary returns a
   # blobject which is not cool, especially if you are puts.
@@ -108,18 +104,34 @@ class Blobject
     super
   end
 
+  def [] name
+    send name
+  end
+
+  def []= name, value
+    send name.to_s + '=', value
+  end
+  
   def freeze
     __visit_subtree__ { |name, node| node.freeze }
     @hash.freeze
     super
   end
 
+  def as_json
+    to_hash
+  end
+
   def to_json
-    to_hash.to_json
+    as_json.to_json
+  end
+
+  def as_yaml
+    to_hash
   end
 
   def to_yaml
-    to_hash.to_yaml
+    as_yaml.to_yaml
   end
 
   def self.from_json json
@@ -169,14 +181,14 @@ private
       if hash_or_array.class <= Array
         return hash_or_array.map do |e|
           if e.class <= Hash
-             blobject e
+             Blobject.new e
           else
             e
           end
         end
       end
 
-      blobject hash_or_array
+      Blobject.new hash_or_array
     end
 
     def __define_attribute__ name

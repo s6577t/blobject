@@ -4,7 +4,7 @@ require 'blobject'
 describe Blobject do
 
   def b
-    @b ||= blobject
+    @b ||= Blobject.new
   end
 
   it 'should raise an error if the call is not a reader, writer or checker' do
@@ -39,6 +39,7 @@ describe Blobject do
   end
 
   describe 'respond_to?' do
+    
     it 'returns true if the blobject has the corresponding member' do
       b.name = 'jim'
       assert b.respond_to?(:name)
@@ -65,18 +66,19 @@ describe Blobject do
     end
 
     it 'should return true if the blobject has the corresponding member but the accessor has not been memoized' do
-      b = blobject :name => 'barry'
+      b = Blobject.new :name => 'barry'
       assert b.respond_to?(:name)
       assert b.respond_to?(:name=)
       assert b.respond_to?(:name?)
     end
 
     it 'returns false for :to_ary because that method is not allowed' do
-      refute blobject.respond_to? :to_ary
+      refute Blobject.new.respond_to? :to_ary
     end
   end
 
   describe 'to_hash' do
+
     it 'should recursively reify the blobject into a hash' do
       b.name.first = 'barry'
       b.number = 123456
@@ -91,7 +93,9 @@ describe Blobject do
   end
 
   describe 'from_json' do
+    
     describe 'array' do
+      
       it 'should return an array with blobjects not hashes' do
         json = '[1, true, {"meaning": false}]'
         array = Blobject.from_json json
@@ -102,7 +106,9 @@ describe Blobject do
         assert_instance_of Blobject, array[2]
       end
     end
+
     describe 'json object' do
+      
       it 'should return a blobject which' do
         json = '{"name": {"first": "doogle"}}'
         b = Blobject.from_json json
@@ -122,13 +128,13 @@ describe Blobject do
     end
 
     it 'recurses through the initial hash turning hashes into blobjects' do
-      b = blobject :name => {:first => 'doogle', :last => 'mcfoogle'}
+      b = Blobject.new :name => {:first => 'doogle', :last => 'mcfoogle'}
       assert_instance_of Blobject, b.name
       assert_equal b.name.first, 'doogle'
     end
 
     it 'yields to a block with self as a parameter' do
-      b = blobject do |b|
+      b = Blobject.new do |b|
         b.name = 'yield'
       end
 
@@ -207,7 +213,7 @@ describe Blobject do
 
         b.name.first = 'Harry'
 
-        b = blobject
+        b = Blobject.new
 
         assert !b.name.nil?
 
@@ -221,7 +227,7 @@ describe Blobject do
   describe 'frozen blobject' do
 
     before :each do
-      list_element = blobject
+      list_element = Blobject.new
 
       b.name.first = 'barry'
       b.data.list = [1, 2, 3, list_element]
@@ -233,21 +239,26 @@ describe Blobject do
     it 'still provides access' do
       refute_nil b.name.first
     end
+
     it 'freezes the internal hash' do
       assert b.hash.frozen?
     end
+
     it 'allows access to existing attributes' do
       assert_equal b.name.first, 'barry'
     end
+
     it 'recursively freezes nested Blobjects' do
       assert b.frozen?
       assert b.name.frozen?
       assert b.data.list[3].frozen?
       assert b.data.inner_hash.frozen?
     end
+
     it 'raises an error when trying to set an attribute' do
       proc { b.hello = 123 }.must_raise RuntimeError
     end
+
     it 'returns nil when trying to get an attribute' do
       assert b.meow_face.nil?, 'method missing returned something'
       # check again to test memoized method
