@@ -7,7 +7,7 @@ describe Blobject do
     @b ||= Blobject.new
   end
 
-  it 'should raise an error if the call is not a reader, writer or checker' do
+  it 'raises an error if the call is not a reader, writer or checker' do
 
     proc do
       b.fish_for :salmon, :sole
@@ -19,23 +19,32 @@ describe Blobject do
 
   end
 
-  it 'should provide access tot he internal hash with #hash' do
+  it 'provides access tot he internal hash with #hash' do
     assert b.hash.equal?(b.instance_variable_get :@hash)
   end
 
-  it 'should set values when calling a writer' do
+  it 'sets values when calling a writer' do
     b.number = 123
     assert_equal b.number, 123
   end
 
-  it 'should set objects n levels deep' do
+  it 'sets objects n levels deep' do
     b.name.nickname.back_at_school = 'Richard Head'
     assert_equal b.name.nickname.back_at_school, 'Richard Head'
   end
 
-  it 'should not result in a graph containing empty blobjects' do
+  it 'does not result in a graph containing empty blobjects' do
     b.fish.food
     assert !b.fish?, 'should not have assigned an empty blobject'
+  end
+
+  it 'turns hashes into blobjects when assigning' do
+    
+    b.name = { christian: "Vinnie", surname: "Jones" }
+    
+    assert_instance_of Blobject, b.name
+    assert_equal b.name.christian, "Vinnie"
+    assert_equal b.name.surname,   "Jones"
   end
 
   describe 'respond_to?' do
@@ -96,7 +105,7 @@ describe Blobject do
     
     describe 'array' do
       
-      it 'should return an array with blobjects not hashes' do
+      it 'returns an array with blobjects not hashes' do
         json = '[1, true, {"meaning": false}]'
         array = Blobject.from_json json
 
@@ -109,7 +118,7 @@ describe Blobject do
 
     describe 'json object' do
       
-      it 'should return a blobject which' do
+      it 'returns a blobject which' do
         json = '{"name": {"first": "doogle"}}'
         b = Blobject.from_json json
         assert_equal b.name.first, 'doogle'

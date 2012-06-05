@@ -1,4 +1,0 @@
-api:
-  host: myapp.com
-  path: /some/resources
-  format: json

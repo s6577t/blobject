@@ -1,0 +1,12 @@
+
+
+ITERATIONS: 1000000
+
+
+BENCHMARK: assign
+=====================
+
+       user     system      total        real
+Object:   0.180000   0.000000   0.180000 (  0.229544)
+Hash:   0.230000   0.000000   0.230000 (  0.241922)
+Hashie: 

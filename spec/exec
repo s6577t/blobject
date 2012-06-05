@@ -4,4 +4,4 @@ require 'ruby-debug' if ARGV.include? 'debug'
 
 $:.push '.'
 
-Dir['./**/*_spec.rb'].each { |test_file| require test_file }
+Dir['./spec/**/*_spec.rb'].each { |test_file| require test_file }

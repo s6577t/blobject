@@ -3,6 +3,7 @@ require 'yaml'
 require_relative 'blobject/version'
 
 class Blobject
+  
   # filter :to_ary else Blobject#to_ary returns a
   # blobject which is not cool, especially if you are puts.
   ProhibitedNames = [:to_ary]
@@ -31,14 +32,17 @@ class Blobject
   end
 
   def inspect
+    
     @hash.inspect
   end
 
   def hash
+    
     @hash
   end
 
   def to_hash
+    
     h = hash.dup
     __visit_subtree__ do |name, node|
       h[name] = node.to_hash if node.respond_to? :to_hash
@@ -46,6 +50,8 @@ class Blobject
     h
   end
 
+  # method_missing is only called the first time an attribute is used. successive calls use
+  # memoized getters, setters and checkers
   def method_missing method, *params, &block
 
     __tag_and_raise__ NoMethodError.new(method) if ProhibitedNames.include?(method)
@@ -89,7 +95,8 @@ class Blobject
   end
 
   def respond_to? method
-    return true if self.methods.include?(method)
+    
+    return true  if self.methods.include?(method)
     return false if ProhibitedNames.include?(method)
 
     method = method.to_s
@@ -101,15 +108,18 @@ class Blobject
 
   def == other
     return @hash == other.hash if other.class <= Blobject
+    return @hash == other      if other.class <= Hash
     super
   end
 
   def [] name
+    
     send name
   end
 
   def []= name, value
-    send name.to_s + '=', value
+    
+    send "#{name.to_s}=", value
   end
   
   def freeze
@@ -119,40 +129,50 @@ class Blobject
   end
 
   def as_json
+    
     to_hash
   end
 
   def to_json
+    
     as_json.to_json
   end
 
   def as_yaml
+    
     to_hash
   end
 
   def to_yaml
+    
     as_yaml.to_yaml
   end
 
   def self.from_json json
+    
     from_json!(json).freeze
   end
 
   def self.from_json! json
+    
     __from_hash_or_array__(JSON.parse(json))
   end
 
   def self.from_yaml yaml
+    
     from_yaml!(yaml).freeze
   end
 
   def self.from_yaml! yaml
+    
     __from_hash_or_array__(YAML.load(yaml))
   end
 
 private
+# to avoid naming collisions private method names are prefixed and suffix with double unerscores (__)
 
   def __visit_subtree__ &block
+    
     @hash.each do |name, node|
 
       if node.class <= Array
@@ -165,6 +185,7 @@ private
     end
   end
 
+  # errors from this library can be handled with rescue Blobject::Error
   def __tag_and_raise__ e
     raise e
   rescue
@@ -202,8 +223,9 @@ private
       unless methods.include? setter_name
         self.send :define_method, setter_name do |value|
           begin
+            value = self.class.new(value) if value.class <= Hash
             @hash[name] = value
-          rescue RuntimeError => ex
+          rescue  ex
             __tag_and_raise__(ex)
           end
           @store_in_parent.call unless @store_in_parent.nil?
