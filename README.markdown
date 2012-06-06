@@ -121,27 +121,27 @@ The runtime performance of something as low level as blobject deserves considera
 
 see `/benchmarks`
 
-ITERATIONS: 1000000
+    ITERATIONS: 1000000
 
 
-BENCHMARK: assign
+    BENCHMARK: assign
 
-            user       system     total       real
-Object:     0.190000   0.000000   0.190000 (  0.229685)
-Hash:       0.220000   0.000000   0.220000 (  0.230500)
-OpenStruct: 0.520000   0.000000   0.520000 (  0.529861)
-Blobject:   0.790000   0.000000   0.790000 (  0.808610)
-Hashie:     8.270000   0.030000   8.300000 (  9.291184)
+                user       system     total       real
+    Object:     0.190000   0.000000   0.190000 (  0.229685)
+    Hash:       0.220000   0.000000   0.220000 (  0.230500)
+    OpenStruct: 0.520000   0.000000   0.520000 (  0.529861)
+    Blobject:   0.790000   0.000000   0.790000 (  0.808610)
+    Hashie:     8.270000   0.030000   8.300000 (  9.291184)
 
 
-BENCHMARK: read
+    BENCHMARK: read
 
-            user       system     total       real
-Hash:       0.160000   0.000000   0.160000 (  0.165141)
-Object:     0.170000   0.000000   0.170000 (  0.170228)
-OpenStruct: 0.340000   0.000000   0.340000 (  0.342430)
-Blobject:   0.410000   0.000000   0.410000 (  0.410574)
-Hashie:     1.880000   0.000000   1.880000 (  1.921718)
+                user       system     total       real
+    Hash:       0.160000   0.000000   0.160000 (  0.165141)
+    Object:     0.170000   0.000000   0.170000 (  0.170228)
+    OpenStruct: 0.340000   0.000000   0.340000 (  0.342430)
+    Blobject:   0.410000   0.000000   0.410000 (  0.410574)
+    Hashie:     1.880000   0.000000   1.880000 (  1.921718)
 
 Host CPU: 2.13GHz Core2
 
