@@ -1,5 +1,5 @@
-![](https://github.com/sjltaylor/blobject/raw/master/blobject.png)
-![](https://github.com/sjltaylor/blobject/raw/master/blob_defn.png)
+![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)
+![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
 
     # Wrapper around a hash to provide arbitrarily nested object style access to attributes 
     class Blobject
