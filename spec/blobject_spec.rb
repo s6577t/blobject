@@ -47,6 +47,25 @@ describe Blobject do
     assert_equal b.name.surname,   "Jones"
   end
 
+  describe 'hash-like access' do
+
+    it 'allows hash-style setters' do
+      
+      b[:foo]  = 123
+      b['bar'] = 456
+      
+      assert_equal "#{b.foo}#{b.bar}", '123456'
+    end
+
+    it 'allows hash-style getters' do
+      
+      b.name = "Jimmy"
+      
+      assert_equal b[:name] , "Jimmy"
+      assert_equal b['name'], "Jimmy"
+    end
+  end
+
   describe 'respond_to?' do
     
     it 'returns true if the blobject has the corresponding member' do

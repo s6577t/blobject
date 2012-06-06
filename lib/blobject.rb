@@ -2,14 +2,15 @@ require 'json'
 require 'yaml'
 require_relative 'blobject/version'
 
+# Wraps a hash to provide arbitrarily nested, object-style attribute access
 class Blobject
   
   # filter :to_ary else Blobject#to_ary returns a
   # blobject which is not cool, especially if you are puts.
   ProhibitedNames = [:to_ary]
 
-  module Error; end
-
+  # pass an optional hash of values to preload
+  # you can also pass a block, the new Blobject will be yield
   def initialize hash = {}
 
     @hash = hash
@@ -31,16 +32,19 @@ class Blobject
     yield self if block_given?
   end
 
+  # delegates to the internal Hash
   def inspect
     
     @hash.inspect
   end
 
+  # access the internal hash. be careful, this is _not_ a copy
   def hash
     
     @hash
   end
 
+  # creates a recursive copy of the internal hash
   def to_hash
     
     h = hash.dup
@@ -106,63 +110,60 @@ class Blobject
     end
   end
 
+  # compares Blobjects to Blobjects or Hashes
   def == other
     return @hash == other.hash if other.class <= Blobject
     return @hash == other      if other.class <= Hash
     super
   end
 
+  # hash-like access to the Blobject's attributes
   def [] name
     
     send name
   end
 
+  # hash-like attribtue setter
   def []= name, value
     
     send "#{name.to_s}=", value
   end
   
+  # freeze a Blobject to prevent it being modified
   def freeze
     __visit_subtree__ { |name, node| node.freeze }
     @hash.freeze
     super
   end
 
+  # returns a hash which can be serialized as json.
+  # this is for use in rails controllers: `render json: blobject`
   def as_json *args
     return hash.as_json(*args) if hash.respond_to? :as_json
     to_hash
   end
 
+  # serialize the Blobject as a json string
   def to_json *args
     as_json.to_json *args
   end
 
-  def as_yaml
-    
-    to_hash
-  end
-
+  # serialize the Blobject as a yaml string
   def to_yaml
     
     as_yaml.to_yaml
   end
 
+  # get a Blobject from a json string
+  # if the yaml string describes an array, an array will be returned
   def self.from_json json
-    
-    from_json!(json).freeze
-  end
-
-  def self.from_json! json
     
     __from_hash_or_array__(JSON.parse(json))
   end
 
+  # get a Blobject from a yaml string
+  # if the yaml string describes an array, an array will be returned
   def self.from_yaml yaml
-    
-    from_yaml!(yaml).freeze
-  end
-
-  def self.from_yaml! yaml
     
     __from_hash_or_array__(YAML.load(yaml))
   end
@@ -184,7 +185,11 @@ private
     end
   end
 
+  # Used to tag and reraise errors from a Blobject
+  # Refer to "Tagging exceptions with modules" on p97 in Exceptional Ruby by Avdi Grimm
   # errors from this library can be handled with rescue Blobject::Error
+  module Error; end
+  
   def __tag_and_raise__ e
     raise e
   rescue

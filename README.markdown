@@ -1,12 +1,16 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/blobject.png)
 ![](https://github.com/sjltaylor/blobject/raw/master/blob_defn.png)
 
-Data structures which __just work__
+    # Wrapper around a hash to provide arbitrarily nested object style access to attributes 
+    class Blobject
+
+
+# LINK TO FULL RDOCS
+# LINK TO NARRATIVE
 
 ## About
 
 A Blobject is a thin wrapper around a hash
-
 
 They are *freeform* which means you can do this...
 
@@ -25,6 +29,16 @@ unlike OpenStruct, Blobjects can be arbitrarily *complex* which means you can do
     data.name.surname = "Begood"
 
     data.my.object.with.deep.nested.members = "happy place"
+
+or assign hashes which become nested blobjects
+
+  data.details = { code: 41239, ref: "#22322" }
+
+  data.details.code
+    => 41239
+  data.details.ref
+    => "#22322"
+
 
 You can test to see if a member is defined:
 
@@ -68,7 +82,7 @@ Using a blobject we can easily avoid having to refactor our code...
     end
 
 
-## Serialization
+## Serializing & Deserializing
 
 Blobjects can be used to easily build complex payloads.
 
@@ -91,9 +105,6 @@ A nice pattern in most cases is to use an initialization block...
     Blobject.new optional_hash_of_initial_data do |b|
       b.name = ...
     end.freeze
-
-
-## Deserialization
 
 
 Suppose you receive a payload from an api which may or may not contain an address and city...
@@ -155,3 +166,24 @@ A Blobject is three-four times slower than an equivalent Object.
 * Ruby 1.8.7 is not supported. Testing rubies...
   * mri 1.9.3-p194
   * mri 1.9.2-p290
+
+
+## Disclaimer
+
+Blobject provides a convenient way to create large freeform data structures; With great power comes great blah blah blah blah...
+
+
+## License
+
+(The MIT License)
+
+Copyright © 2012 [Sam Taylor](http://sjltaylor.com/)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Copyright (c) 2012 Sam Taylor. See LICENSE.txt for
+further details.
