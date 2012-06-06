@@ -128,14 +128,13 @@ class Blobject
     super
   end
 
-  def as_json
-    
+  def as_json *args
+    return hash.as_json(*args) if hash.respond_to? :as_json
     to_hash
   end
 
-  def to_json
-    
-    as_json.to_json
+  def to_json *args
+    as_json.to_json *args
   end
 
   def as_yaml
