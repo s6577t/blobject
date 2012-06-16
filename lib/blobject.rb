@@ -32,6 +32,10 @@ class Blobject
     yield self if block_given?
   end
 
+  def empty?
+    @hash.empty?
+  end
+
   # delegates to the internal Hash
   def inspect
     

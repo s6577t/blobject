@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    blobject (0.3.3)
+    blobject (0.3.4)
 
 GEM
   remote: http://rubygems.org/

@@ -47,6 +47,13 @@ describe Blobject do
     assert_equal b.name.surname,   "Jones"
   end
 
+  it 'can indicate whether it is empty' do
+    b = Blobject.new
+    b.must_be :empty?
+    b.name = "something"
+    b.wont_be :empty?
+  end
+
   describe 'hash-like access' do
 
     it 'allows hash-style setters' do
