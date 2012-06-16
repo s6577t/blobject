@@ -1,5 +1,4 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)    
-![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
 
 Rdocs: [http://sjltaylor.github.com/blobject](http://sjltaylor.github.com/blobject)
 
@@ -251,6 +250,9 @@ A Blobject is three-four times slower than an equivalent Object.
 ## Disclaimer
 
 Blobject provides a convenient way to create large freeform data structures; With great power comes great blah blah blah blah...
+
+
+![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
 
 
 ## License
