@@ -1,0 +1,25 @@
+{
+  "device_id": 63354,
+  "channel_no": 6,
+  "interval_ms": 15000,
+  "readings": [
+    {
+      "value": 14232,
+      "time": 1339880802
+    },
+    {
+      "value": 14232,
+      "time": 1339880817
+    }
+  ],
+  "calibration": {
+    "staff": {
+      "name": {
+        "first": "Carl",
+        "middle_initial": "I",
+        "second": "Brator"
+      }
+    },
+    "last_calibration": "2010-06-16T22:06:42+01:00"
+  }
+}

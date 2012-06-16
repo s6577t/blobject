@@ -27,6 +27,7 @@ class Blobject
     yield self if block_given?
   end
 
+  # indicates whether the blobject contains any data
   def empty?
     @hash.empty?
   end
@@ -110,7 +111,7 @@ class Blobject
     end
   end
 
-  # compares Blobjects to Blobjects or Hashes
+  # compares Blobjects to Blobjects or Hashes for equality
   def == other
     return @hash == other.hash if other.class <= Blobject
     return @hash == other      if other.class <= Hash
@@ -123,7 +124,7 @@ class Blobject
     send name
   end
 
-  # hash-like attribtue setter
+  # hash-like attribute setter
   def []= name, value
     
     send "#{name.to_s}=", value
@@ -135,14 +136,14 @@ class Blobject
     super
   end
 
+  # recursively freeze the Blobject include nest Blobjects in arrays
   def freeze_r
     self.class.send(:__freeze_r__, self)
     freeze
   end
 
 
-  # returns a hash which can be serialized as json.
-  # this is for use in rails controllers: `render json: blobject`
+  # for rails: `render json: blobject`
   def as_json *args
     return hash.as_json(*args) if hash.respond_to? :as_json
     to_hash
@@ -159,15 +160,13 @@ class Blobject
     as_yaml.to_yaml
   end
 
-  # get a Blobject from a json string
-  # if the yaml string describes an array, an array will be returned
+  # get a Blobject from a json string, if the yaml string describes an array, an array will be returned
   def self.from_json json
     
     __blobjectify__(JSON.parse(json))
   end
 
-  # get a Blobject from a yaml string
-  # if the yaml string describes an array, an array will be returned
+  # get a Blobject from a yaml string, if the yaml string describes an array, an array will be returned
   def self.from_yaml yaml
     
     __blobjectify__(YAML.load(yaml))
@@ -176,7 +175,7 @@ class Blobject
 private
 # to avoid naming collisions private method names are prefixed and suffix with double unerscores (__)
 
-  # Used to tag and reraise errors from a Blobject
+  # Used to tag and re-raise errors from a Blobject
   # Refer to "Tagging exceptions with modules" on p97 in Exceptional Ruby by Avdi Grimm
   # errors from this library can be handled with rescue Blobject::Error
   module Error; end

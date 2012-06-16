@@ -1,3 +1,4 @@
 class Blobject
-  VERSION = '0.3.7'
+  # semver gem version
+  VERSION = '0.3.8'
 end

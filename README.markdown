@@ -2,6 +2,7 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
 
 Getting started: `http://sjltaylor.com/blobject'
+Rdocs: `http://blobject.github.com/sjltaylor/blobject.git`
 
 ## About
 
