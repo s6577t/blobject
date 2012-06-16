@@ -2,7 +2,7 @@ require 'json'
 require 'yaml'
 require_relative 'blobject/version'
 
-# Wraps a hash to provide arbitrarily nested, object-style attribute access
+# Wraps a hash to provide arbitrarily nested object-style attribute access
 class Blobject
   
   # filter :to_ary else Blobject#to_ary returns a

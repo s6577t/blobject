@@ -1,7 +1,9 @@
+#!!!! never freeze blobjects automatically (such as when reading them from json or yaml)
+
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
 
-    # Wrapper around a hash to provide arbitrarily nested object style access to attributes 
+    # Wraps a hash to provide arbitrarily nested object-style attribute access
     class Blobject
 
 
@@ -9,8 +11,6 @@
 # LINK TO NARRATIVE
 
 ## About
-
-A Blobject is a thin wrapper around a hash
 
 They are *freeform* which means you can do this...
 
