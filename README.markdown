@@ -1,8 +1,7 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
 
-# LINK TO FULL RDOCS
-# LINK TO NARRATIVE
+Getting started: `http://sjltaylor.com/blobject'
 
 ## About
 
@@ -63,8 +62,11 @@ You can use it like a hash
 
 You can get access to the internal hash with `Blobject#hash` or a de-blobjectified copy with `Blobject#to_hash`
 
-You can call `Blobject#freeze` to prevent the data being modified
+You can call `Blobject#freeze` to prevent the data being modified. This still allows chained calls: `blobject.data.nested.is_something_here?` but assignments will raise `RuntimeError: can't modify frozen Hash`
 
+You can work with JSON data using `Blobject.from_json` and `Blobject#to_json`, in Rails, you can use `Blobject#as_json` as you would with a hash.
+
+You can work with YAML data using `Blobject.from_yaml` and `Blobject#to_yaml`.
 
 
 ## Used for Configuration

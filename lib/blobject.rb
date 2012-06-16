@@ -13,20 +13,15 @@ class Blobject
   # you can also pass a block, the new Blobject will be yield
   def initialize hash = {}
 
-    @hash = hash
+    @hash = Hash.new
 
-    @hash.keys.each do |key|
-      unless key.class <= Symbol
-        value = @hash.delete key
-        key = key.to_sym
-        @hash[key] = value
-      end
+    hash.each do |key, value|
+      key = key.to_sym unless key.is_a? Symbol
+      @hash[key] = value
     end
 
-    __visit_subtree__ do |name, node|
-      if node.class <= Hash
-        @hash[name] = Blobject.new node
-      end
+    @hash.each do |name, node|
+      @hash[name] = self.class.send(:__blobjectify__, node)
     end
 
     yield self if block_given?
@@ -52,7 +47,7 @@ class Blobject
   def to_hash
     
     h = hash.dup
-    __visit_subtree__ do |name, node|
+    @hash.each do |name, node|
       h[name] = node.to_hash if node.respond_to? :to_hash
     end
     h
@@ -136,10 +131,15 @@ class Blobject
   
   # freeze a Blobject to prevent it being modified
   def freeze
-    __visit_subtree__ { |name, node| node.freeze }
     @hash.freeze
     super
   end
+
+  def freeze_r
+    self.class.send(:__freeze_r__, self)
+    freeze
+  end
+
 
   # returns a hash which can be serialized as json.
   # this is for use in rails controllers: `render json: blobject`
@@ -163,32 +163,18 @@ class Blobject
   # if the yaml string describes an array, an array will be returned
   def self.from_json json
     
-    __from_hash_or_array__(JSON.parse(json))
+    __blobjectify__(JSON.parse(json))
   end
 
   # get a Blobject from a yaml string
   # if the yaml string describes an array, an array will be returned
   def self.from_yaml yaml
     
-    __from_hash_or_array__(YAML.load(yaml))
+    __blobjectify__(YAML.load(yaml))
   end
 
 private
 # to avoid naming collisions private method names are prefixed and suffix with double unerscores (__)
-
-  def __visit_subtree__ &block
-    
-    @hash.each do |name, node|
-
-      if node.class <= Array
-        node.flatten.each do |node_node|
-          block.call(nil, node_node, &block)
-        end
-      end
-
-      block.call name, node, &block
-    end
-  end
 
   # Used to tag and reraise errors from a Blobject
   # Refer to "Tagging exceptions with modules" on p97 in Exceptional Ruby by Avdi Grimm
@@ -206,19 +192,35 @@ private
 
   private
 
-    def __from_hash_or_array__ hash_or_array
-
-      if hash_or_array.class <= Array
-        return hash_or_array.map do |e|
-          if e.class <= Hash
-             Blobject.new e
-          else
-            e
-          end
+    def __freeze_r__ object
+      
+      case object
+      when Array
+        return object.each do |e|
+          e.freeze
+          __freeze_r__(e)
         end
+      when Hash
+        return object.each do |k, v|
+          v.freeze
+          __freeze_r__(v)
+        end
+      when Blobject
+        object.freeze
+        __freeze_r__ object.hash
+      else
+        object.freeze
       end
+    end
 
-      Blobject.new hash_or_array
+    def __blobjectify__ object
+
+      array = object if object.is_a? Array
+      hash  = object if object.is_a? Hash
+
+      return array.map{|a| __blobjectify__(a)} if array
+      return Blobject.new(hash) if hash
+      return object
     end
 
     def __define_attribute__ name
@@ -232,7 +234,7 @@ private
       unless methods.include? setter_name
         self.send :define_method, setter_name do |value|
           begin
-            value = self.class.new(value) if value.class <= Hash
+            value = self.class.send(:__blobjectify__, value) if value.is_a?(Hash) or value.is_a?(Array)
             @hash[name] = value
           rescue  ex
             __tag_and_raise__(ex)

@@ -47,6 +47,17 @@ describe Blobject do
     assert_equal b.name.surname,   "Jones"
   end
 
+  it 'recursively blobjectifies assigned values' do
+    b.data = {name: 'jim', number: 144}
+    b.data.must_be_instance_of Blobject
+  end
+
+  it 'recursively blobjectifies assigned arrays' do
+    b.data = [{name: 'jim', number: 144}, [{name: 'jam', number: 147}]]
+    b.data[0].must_be_instance_of Blobject
+    b.data[1][0].must_be_instance_of Blobject
+  end
+
   it 'can indicate whether it is empty' do
     b = Blobject.new
     b.must_be :empty?
@@ -259,7 +270,14 @@ describe Blobject do
     end
   end
 
-  describe 'frozen blobject' do
+  describe 'freeze' do
+    it 'freezes the internal hash' do
+      b.freeze
+      b.hash.must_be :frozen?
+    end
+  end
+
+  describe 'freeze_r' do
 
     before :each do
       list_element = Blobject.new
@@ -268,7 +286,7 @@ describe Blobject do
       b.data.list = [1, 2, 3, list_element]
       b.data.inner_hash = {:inner => {:one => 1}}
 
-      b.freeze
+      b.freeze_r
     end
 
     it 'still provides access' do
