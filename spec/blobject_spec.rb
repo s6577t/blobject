@@ -294,10 +294,10 @@ describe Blobject do
       proc { b.hello = 123 }.must_raise RuntimeError
     end
 
-    it 'returns nil when trying to get an attribute' do
-      assert b.meow_face.nil?, 'method missing returned something'
+    it 'still returns a blobject when trying to get an attribute' do
+      b.meow_face.must_be_instance_of Blobject
       # check again to test memoized method
-      assert b.meow_face.nil?, 'memoized method returned something'
-     end
+      b.meow_face.must_be_instance_of Blobject
+    end
   end
 end
