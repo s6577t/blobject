@@ -5,7 +5,8 @@ docs:
 	set -o errexit
 
 	git checkout gh-pages # fail&bail if there are uncommitted changes
-	git rm -rf ./*
+	rm -rf *
+	rm -rf .yardoc
 	git clone git://github.com/sjltaylor/blobject.git
 	cd blobject
 	yard doc
