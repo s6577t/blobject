@@ -1,11 +1,51 @@
-![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)
+![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)    
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
 
-Getting started: `http://sjltaylor.com/blobject'
-Rdocs: `http://blobject.github.com/sjltaylor/blobject.git`
+Rdocs: [http://sjltaylor.github.com/blobject](http://sjltaylor.github.com/blobject)
 
 ## About
 
+Consider the following json sample...
+
+    {
+      "device_id": 63354,
+      "channel_no": 6,
+      "interval_ms": 15000,
+      "readings": [
+        {
+          "value": 14232,
+          "time": 1339880802
+        },
+        {
+          "value": 14232,
+          "time": 1339880817
+        }
+      ],
+      "calibration": {
+        "staff": {
+          "name": {
+            "first": "Carl",
+            "middle_initial": "I",
+            "second": "Brator"
+          }
+        },
+        "last_calibration": "2010-06-16T22:06:42+01:00"
+      }
+    }
+
+Blobject let's you do this (complete code listing, no predefined data structures):
+
+
+    data = Blobject.from_json HTTParty.get('https://raw.github.com/sjltaylor/blobject/master/spec/sample_data/sample3.json')
+    
+    full_name = "#{data.calibration.staff.name.first}#{data.calibration.staff.name.middle_initial}#{data.calibration.staff.name.second}".capitalize
+      => "Calibrator"
+
+    last_reading = data.readings.last.value if data.readings?
+      => 14232
+
+
+Blobject is convenient to creating json payloads too.
 Blobjects are *freeform* which means you can do this...
 
     data = Blobject.new
@@ -69,6 +109,23 @@ You can work with JSON data using `Blobject.from_json` and `Blobject#to_json`, i
 
 You can work with YAML data using `Blobject.from_yaml` and `Blobject#to_yaml`.
 
+## Try it out...
+
+1. Install the gem (ruby 1.9.2+ required): `sh <(curl https://raw.github.com/sjltaylor/blobject/master/try_blobject.sh)`
+2. Load data from an api...
+    payload = Blobject.from_json HTTParty.get('https://raw.github.com/sjltaylor/blobject/master/spec/sample_data/sample3.json')
+3. Inspect it
+    payload.calibration.staff.name
+    => {:first=>"Carl", :middle_initial=>"I", :second=>"Brator"}
+4. Test for optional data members
+    payload.channel_no?
+      => true
+    payload.something_that_is_not_there?
+      => false
+5. Draw your own payload
+    mine = Blobject.new my: {data: 123}
+    mine.to_json
+      => "{\"my\":{\"data\":123}}"
 
 ## Used for Configuration
 
@@ -105,7 +162,7 @@ Using a blobject we can easily avoid having to refactor our code...
     end
 
 
-## Serializing & Deserializing
+## Serialization
 
 Blobjects can be used to easily build complex payloads.
 
