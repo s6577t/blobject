@@ -1,7 +1,7 @@
 test:
 	./spec/exec
 
-docs:
+gh-pages:
 	set -o errexit
 
 	git checkout gh-pages # fail&bail if there are uncommitted changes
@@ -15,4 +15,4 @@ docs:
 	git checkout master
 
 
-.PHONY: test docs
+.PHONY: test gh-pages
