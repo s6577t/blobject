@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.8.1
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><p><img src="https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png" alt="">    </p>
+
+<p>Rdocs: <a href="http://sjltaylor.github.com/blobject">http://sjltaylor.github.com/blobject</a></p>
+
+<h2>About</h2>
+
+<p>Consider the following json sample...</p>
+
+<pre class="code ruby"><code>{
+  &quot;device_id&quot;: 63354,
+  &quot;channel_no&quot;: 6,
+  &quot;interval_ms&quot;: 15000,
+  &quot;readings&quot;: [
+    {
+      &quot;value&quot;: 14232,
+      &quot;time&quot;: 1339880802
+    },
+    {
+      &quot;value&quot;: 14232,
+      &quot;time&quot;: 1339880817
+    }
+  ],
+  &quot;calibration&quot;: {
+    &quot;staff&quot;: {
+      &quot;name&quot;: {
+        &quot;first&quot;: &quot;Carl&quot;,
+        &quot;middle_initial&quot;: &quot;I&quot;,
+        &quot;second&quot;: &quot;Brator&quot;
+      }
+    },
+    &quot;last_calibration&quot;: &quot;2010-06-16T22:06:42+01:00&quot;
+  }
+}
+</code></pre>
+
+<p>Blobject let&#39;s you do this (complete code listing, no predefined data structures):</p>
+
+<pre class="code ruby"><code>data = Blobject.from_json HTTParty.get('https://raw.github.com/sjltaylor/blobject/master/spec/sample_data/sample3.json')
+
+full_name = &quot;#{data.calibration.staff.name.first}#{data.calibration.staff.name.middle_initial}#{data.calibration.staff.name.second}&quot;.capitalize
+  =&gt; &quot;Calibrator&quot;
+
+last_reading = data.readings.last.value if data.readings?
+  =&gt; 14232
+</code></pre>
+
+<p>Blobject is convenient to creating json payloads too.
+Blobjects are <em>freeform</em> which means you can do this...</p>
+
+<pre class="code ruby"><code><span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>Blobject</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+<span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>   <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Johnny</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_number'>number</span> <span class='op'>=</span> <span class='int'>316</span>
+</code></pre>
+
+<p>like an <code>OpenStruct</code>, the members are not predefined attributes</p>
+
+<p>unlike <code>OpenStruct</code>, <code>Blobject</code>s can be arbitrarily <em>complex</em> which means you can do this...</p>
+
+<pre class="code ruby"><code>data = Blobject.new
+  =&gt; {}
+
+data.name.first   = &quot;Johnny&quot;
+data.name.surname = &quot;Begood&quot;
+  =&gt; {:name=&gt;{:first=&gt;&quot;Johnny&quot;, :surname=&gt;&quot;Begood&quot;}}
+
+data.my.object.with.deep.nested.members = &quot;happy place&quot;
+  =&gt; {:name=&gt;{:first=&gt;&quot;Johnny&quot;, :surname=&gt;&quot;Begood&quot;}, :my=&gt;{:object=&gt;{:with=&gt;{:deep=&gt;{:nested=&gt;{:members=&gt;&quot;happy place&quot;}}}}}}
+</code></pre>
+
+<p>You can assign hashes which become nested blobjects</p>
+
+<p>data.details = { code: 41239, ref: &quot;#22322&quot; }</p>
+
+<p>data.details.code
+    =&gt; 41239
+  data.details.code = 11322
+  data.details.code
+    =&gt; 11322
+  data.details.ref
+    =&gt; &quot;#22322&quot;</p>
+
+<p>You can test to see if a member is defined:</p>
+
+<pre class="code ruby"><code>data.something_here?
+  =&gt; false
+data.name?
+  =&gt; true
+</code></pre>
+
+<p>You can use it like a hash</p>
+
+<pre class="code ruby"><code>data[:name]
+  =&gt; {:first=&gt;&quot;Johnny&quot;, :surname=&gt;&quot;Begood&quot;}
+
+data[:name][:first] = &quot;Jimmy&quot;; data[:name]
+  =&gt; {:first=&gt;&quot;Jimmy&quot;, :surname=&gt;&quot;Begood&quot;}
+
+data.empty?
+  =&gt; false
+
+data.name == {:first=&gt;&quot;Jimmy&quot;, :surname=&gt;&quot;Begood&quot;}
+  =&gt; true
+</code></pre>
+
+<p>You can get access to the internal hash with <code>Blobject#hash</code> or a de-blobjectified copy with <code>Blobject#to_hash</code></p>
+
+<p>You can call <code>Blobject#freeze</code> to prevent the data being modified. This still allows chained calls: <code>blobject.data.nested.is_something_here?</code> but assignments will raise <code>RuntimeError: can&#39;t modify frozen Hash</code></p>
+
+<p>You can work with JSON data using <code>Blobject.from_json</code> and <code>Blobject#to_json</code>, in Rails, you can use <code>Blobject#as_json</code> as you would with a hash.</p>
+
+<p>You can work with YAML data using <code>Blobject.from_yaml</code> and <code>Blobject#to_yaml</code>.</p>
+
+<h2>Try it out...</h2>
+
+<ol>
+<li>Install the gem (ruby 1.9.2+ required): <code>sh &lt;(curl https://raw.github.com/sjltaylor/blobject/master/try_blobject.sh)</code></li>
+<li>Load data from an api...
+payload = Blobject.from<em>json HTTParty.get(&#39;<a href="https://raw.github.com/sjltaylor/blobject/master/spec/sample">https://raw.github.com/sjltaylor/blobject/master/spec/sample</a></em>data/sample3.json&#39;)</li>
+<li>Inspect it
+payload.calibration.staff.name
+=&gt; :middle_initial=&gt;&quot;I&quot;, :second=&gt;&quot;Brator&quot;</li>
+<li>Test for optional data members
+payload.channel<em>no?
+  =&gt; true
+payload.something</em>that<em>is</em>not_there?
+  =&gt; false</li>
+<li>Draw your own payload
+mine = Blobject.new my: 123
+mine.to_json
+  =&gt; &quot;\&quot;my\&quot;:{\&quot;data\&quot;:123}&quot;</li>
+</ol>
+
+<h2>Used for Configuration</h2>
+
+<p>Consider a configuration object which contains credentials for a third-party api.</p>
+
+<pre class="code ruby"><code>third_party_api:
+  secret_key: 'S3CR3T'
+  endpoint: 'http://services.thirdparty.net/api'
+</code></pre>
+
+<p>With a hash, usage looks like this:</p>
+
+<pre class="code ruby"><code><span class='const'>CONFIG</span><span class='lbracket'>[</span><span class='symbol'>:third_party_api</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:endpoint</span><span class='rbracket'>]</span>
+</code></pre>
+
+<p>With a Blobject, usage looks like this:</p>
+
+<pre class="code ruby"><code><span class='const'>CONFIG</span><span class='period'>.</span><span class='id identifier rubyid_third_party_api'>third_party_api</span><span class='period'>.</span><span class='id identifier rubyid_endpoint'>endpoint</span>
+</code></pre>
+
+<p>References to the endpoint are scattered throughout the codebase, then one day the endpoint is separated into its constituent parts to aide in testing and staging.</p>
+
+<pre class="code ruby"><code>third_party_api:
+  secret_key: 'S3CR3T'
+  protocol: 'http'
+  hostname: 'services.thirdparty.net'
+  path: '/api'
+</code></pre>
+
+<p>Using a blobject we can easily avoid having to refactor our code...</p>
+
+<pre class="code ruby"><code><span class='const'>CONFIG</span> <span class='op'>=</span> <span class='const'>Blobject</span><span class='period'>.</span><span class='id identifier rubyid_from_yaml'>from_yaml</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>./config.yml</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+
+<span class='const'>CONFIG</span><span class='period'>.</span><span class='id identifier rubyid_third_party_api'>third_party_api</span><span class='period'>.</span><span class='id identifier rubyid_instance_eval'>instance_eval</span> <span class='kw'>do</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_endpoint'>endpoint</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_protocol'>protocol</span><span class='rbrace'>}</span><span class='tstring_content'>://</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_hostname'>hostname</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>Serialization</h2>
+
+<p>Blobjects can be used to easily build complex payloads.</p>
+
+<pre class="code ruby"><code>person = Blobject.new
+
+person.name = first: 'David', last: 'Platt'
+
+person.address.tap do |address|
+  address.street = &quot;...&quot;
+  address.city   = &quot;...&quot;
+end
+
+person.next_of_kin.address.city = '...'
+
+# after the payload is constructed it can be frozen to prevent modification
+person.freeze
+</code></pre>
+
+<p>A nice pattern in most cases is to use an initialization block...</p>
+
+<pre class="code ruby"><code>Blobject.new optional_hash_of_initial_data do |b|
+  b.name = ...
+end.freeze
+</code></pre>
+
+<p>Suppose you receive a payload from an api which may or may not contain an address and city...</p>
+
+<pre class="code ruby"><code>payload = Blobject.from_json request[:payload]
+
+# if the payload does have an address...
+city = payload.address.city
+  =&gt; 'Liverpool'
+
+# if the payload does not have an address or city
+city = payload.address.city
+  =&gt; nil
+# rather than request[:payload][:address][:city] which would raise
+# NoMethodError: undefined method `[]' for nil:NilClass
+</code></pre>
+
+<p>Also, you don&#39;t need to concern yourself whether hash keys are symbols or strings.</p>
+
+<h2>Performance</h2>
+
+<p>The runtime performance of something as low level as blobject deserves consideration.</p>
+
+<p>see <code>/benchmarks</code></p>
+
+<pre class="code ruby"><code>ITERATIONS: 1000000
+
+
+BENCHMARK: assign
+
+            user       system     total       real
+Object:     0.190000   0.000000   0.190000 (  0.229685)
+Hash:       0.220000   0.000000   0.220000 (  0.230500)
+OpenStruct: 0.520000   0.000000   0.520000 (  0.529861)
+Blobject:   0.790000   0.000000   0.790000 (  0.808610)
+Hashie:     8.270000   0.030000   8.300000 (  9.291184)
+
+
+BENCHMARK: read
+
+            user       system     total       real
+Hash:       0.160000   0.000000   0.160000 (  0.165141)
+Object:     0.170000   0.000000   0.170000 (  0.170228)
+OpenStruct: 0.340000   0.000000   0.340000 (  0.342430)
+Blobject:   0.410000   0.000000   0.410000 (  0.410574)
+Hashie:     1.880000   0.000000   1.880000 (  1.921718)
+</code></pre>
+
+<p>Host CPU: 2.13GHz Core2</p>
+
+<p>A Blobject is three-four times slower than an equivalent Object.</p>
+
+<h2>Limitations</h2>
+
+<ul>
+<li>will not work with basic objects unless #class and #freeze are implemented</li>
+<li>cyclic blobject graphs result in infinite recursion StackOverflow</li>
+<li>Ruby 1.8.7 is not supported. Testing rubies...
+
+<ul>
+<li>mri 1.9.3-p194</li>
+<li>mri 1.9.2-p290</li>
+</ul></li>
+</ul>
+
+<h2>Disclaimer</h2>
+
+<p>Blobject provides a convenient way to create large freeform data structures; With great power comes great blah blah blah blah...</p>
+
+<p><img src="https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png" alt=""></p>
+
+<h2>License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright © 2012 <a href="http://sjltaylor.com/">Sam Taylor</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+
+<p>Copyright (c) 2012 Sam Taylor. See LICENSE.txt for
+further details.</p>
+</div></div>
+
+    <div id="footer">
+  Generated on Sun Jun 17 00:10:09 2012 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.1 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>

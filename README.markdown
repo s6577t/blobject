@@ -252,9 +252,6 @@ A Blobject is three-four times slower than an equivalent Object.
 Blobject provides a convenient way to create large freeform data structures; With great power comes great blah blah blah blah...
 
 
-![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
-
-
 ## License
 
 (The MIT License)
@@ -269,3 +266,6 @@ THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 Copyright (c) 2012 Sam Taylor. See LICENSE.txt for
 further details.
+
+![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
+

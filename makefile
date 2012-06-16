@@ -6,14 +6,7 @@ docs:
 
 	git checkout gh-pages # fail&bail if there are uncommitted changes
 	rm -rf *
-	rm -rf .yardoc
 	git clone git://github.com/sjltaylor/blobject.git
-	tree .
-	cd blobject
-	yard doc --markup markdown --readme README.markdown 
-	cd ..
-	echo `pwd`
-	tree .
 	mv blobject/doc/* ./
 	rm -rf blobject
 	git add -A .
