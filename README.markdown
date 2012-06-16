@@ -1,5 +1,3 @@
-#!!!! never freeze blobjects automatically (such as when reading them from json or yaml)
-
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
 
