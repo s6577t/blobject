@@ -9,7 +9,8 @@ docs:
 	rm -rf .yardoc
 	git clone git://github.com/sjltaylor/blobject.git
 	cd blobject
-	yard doc --markup markdown --readme README.markdown && cd ..
+	yard doc --markup markdown --readme README.markdown 
+	cd ..
 	mv blobject/doc/* ./
 	rm -rf blobject
 	git add -A .
