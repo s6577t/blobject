@@ -68,12 +68,13 @@ class Blobject
     # assignment in conditionals is usually a bad smell, here it helps minimize regex matching
     when (name = method[/^\w+$/, 0]) && params.length == 0
       # the call is an attribute reader
-      return nil if frozen? and not @hash.has_key?(method)
-
+      
+      return self.class.new.freeze if frozen? and not @hash.has_key?(method)
       self.class.send :__define_attribute__, name
 
       return send(method) if @hash.has_key? method
 
+      # close the scope for storing call chain
       parent          = self
       nested_blobject = self.class.new
 
@@ -245,9 +246,9 @@ private
 
           value = @hash[name]
 
-          if value.nil? && !frozen?
+          if value.nil? 
             value = self.class.new
-            @hash[name] = value
+            @hash[name] = value unless frozen?
           end
 
           value

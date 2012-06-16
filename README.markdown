@@ -1,39 +1,41 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
 
-    # Wraps a hash to provide arbitrarily nested object-style attribute access
-    class Blobject
-
-
 # LINK TO FULL RDOCS
 # LINK TO NARRATIVE
 
 ## About
 
-They are *freeform* which means you can do this...
+Blobjects are *freeform* which means you can do this...
 
     data = Blobject.new
 
     data.name   = "Johnny"
     data.number = 316
 
-like an OpenStruct, the members are not predefined attributes
+like an `OpenStruct`, the members are not predefined attributes
 
-unlike OpenStruct, Blobjects can be arbitrarily *complex* which means you can do this...
+unlike `OpenStruct`, `Blobject`s can be arbitrarily *complex* which means you can do this...
 
     data = Blobject.new
+      => {}
 
     data.name.first   = "Johnny"
     data.name.surname = "Begood"
+      => {:name=>{:first=>"Johnny", :surname=>"Begood"}}
 
     data.my.object.with.deep.nested.members = "happy place"
+      => {:name=>{:first=>"Johnny", :surname=>"Begood"}, :my=>{:object=>{:with=>{:deep=>{:nested=>{:members=>"happy place"}}}}}}
 
-or assign hashes which become nested blobjects
+You can assign hashes which become nested blobjects
 
   data.details = { code: 41239, ref: "#22322" }
 
   data.details.code
     => 41239
+  data.details.code = 11322
+  data.details.code
+    => 11322
   data.details.ref
     => "#22322"
 
@@ -42,6 +44,26 @@ You can test to see if a member is defined:
 
     data.something_here?
       => false
+    data.name?
+      => true
+
+You can use it like a hash
+
+    data[:name]
+      => {:first=>"Johnny", :surname=>"Begood"}
+
+    data[:name][:first] = "Jimmy"; data[:name]
+      => {:first=>"Jimmy", :surname=>"Begood"}
+
+    data.empty?
+      => false
+
+    data.name == {:first=>"Jimmy", :surname=>"Begood"}
+      => true
+
+You can get access to the internal hash with `Blobject#hash` or a de-blobjectified copy with `Blobject#to_hash`
+
+You can call `Blobject#freeze` to prevent the data being modified
 
 
 
