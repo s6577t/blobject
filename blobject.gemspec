@@ -13,12 +13,12 @@ Gem::Specification.new do |s|
   s.description = %q{Blobject provides a free flowing syntax for creating blobs of data.}
 
   s.rubyforge_project = "blobject"
-  
+
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'minitest-reporters'
   s.add_development_dependency 'pry'
-  s.add_development_dependency 'debugger'
-  
+  s.add_development_dependency 'pry-nav'
+
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }

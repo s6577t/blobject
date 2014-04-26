@@ -19,7 +19,7 @@ describe Blobject do
 
   end
 
-  it 'provides access tot he internal hash with #hash' do
+  it 'provides access to the internal hash with #hash' do
     assert b.hash.equal?(b.instance_variable_get :@hash)
   end
 
@@ -39,9 +39,9 @@ describe Blobject do
   end
 
   it 'turns hashes into blobjects when assigning' do
-    
+
     b.name = { christian: "Vinnie", surname: "Jones" }
-    
+
     assert_instance_of Blobject, b.name
     assert_equal b.name.christian, "Vinnie"
     assert_equal b.name.surname,   "Jones"
@@ -68,24 +68,24 @@ describe Blobject do
   describe 'hash-like access' do
 
     it 'allows hash-style setters' do
-      
+
       b[:foo]  = 123
       b['bar'] = 456
-      
+
       assert_equal "#{b.foo}#{b.bar}", '123456'
     end
 
     it 'allows hash-style getters' do
-      
+
       b.name = "Jimmy"
-      
+
       assert_equal b[:name] , "Jimmy"
       assert_equal b['name'], "Jimmy"
     end
   end
 
   describe 'respond_to?' do
-    
+
     it 'returns true if the blobject has the corresponding member' do
       b.name = 'jim'
       assert b.respond_to?(:name)
@@ -93,14 +93,14 @@ describe Blobject do
       assert b.respond_to?(:name?)
     end
 
-    it 'should return true if a prohibited attribute name is a defined method' do
+    it 'returns true if a prohibited attribute name is a defined method' do
       def b.to_ary
         123
       end
       assert b.respond_to? :to_ary
     end
 
-    it 'should return false if the methods ends with a !' do
+    it 'returns false if the methods ends with a !' do
       refute b.respond_to? :hello!
     end
 
@@ -111,7 +111,7 @@ describe Blobject do
       assert b.respond_to?(:name?)
     end
 
-    it 'should return true if the blobject has the corresponding member but the accessor has not been memoized' do
+    it 'returns true if the blobject has the corresponding member but the accessor has not been memoized' do
       b = Blobject.new :name => 'barry'
       assert b.respond_to?(:name)
       assert b.respond_to?(:name=)
@@ -139,9 +139,9 @@ describe Blobject do
   end
 
   describe 'from_json' do
-    
+
     describe 'array' do
-      
+
       it 'returns an array with blobjects not hashes' do
         json = '[1, true, {"meaning": false}]'
         array = Blobject.from_json json
@@ -154,7 +154,7 @@ describe Blobject do
     end
 
     describe 'json object' do
-      
+
       it 'returns a blobject which' do
         json = '{"name": {"first": "doogle"}}'
         b = Blobject.from_json json
@@ -199,9 +199,13 @@ describe Blobject do
       assert !b.fish?
     end
 
-    it 'does not indicate the boolean status of the value' do
-      b.fish = false
-      assert b.fish?
+    describe 'when the value is a boolean' do
+      it 'indicates false correctly' do
+        b.fish = true
+        assert b.fish?
+        b.fish = false
+        refute b.fish?
+      end
     end
   end
 
@@ -271,14 +275,6 @@ describe Blobject do
   end
 
   describe 'freeze' do
-    it 'freezes the internal hash' do
-      b.freeze
-      b.hash.must_be :frozen?
-    end
-  end
-
-  describe 'freeze_r' do
-
     before :each do
       list_element = Blobject.new
 
@@ -286,7 +282,12 @@ describe Blobject do
       b.data.list = [1, 2, 3, list_element]
       b.data.inner_hash = {:inner => {:one => 1}}
 
-      b.freeze_r
+      b.freeze
+    end
+
+    it 'freezes the internal hash' do
+      b.freeze
+      b.hash.must_be :frozen?
     end
 
     it 'still provides access' do
@@ -318,4 +319,5 @@ describe Blobject do
       b.meow_face.must_be_instance_of Blobject
     end
   end
+
 end

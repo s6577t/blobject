@@ -4,7 +4,7 @@ require_relative 'blobject/version'
 
 # Wraps a hash to provide arbitrarily nested object-style attribute access
 class Blobject
-  
+
   # filter :to_ary else Blobject#to_ary returns a
   # blobject which is not cool, especially if you are puts.
   ProhibitedNames = [:to_ary]
@@ -34,19 +34,18 @@ class Blobject
 
   # delegates to the internal Hash
   def inspect
-    
+
     @hash.inspect
   end
 
   # access the internal hash. be careful, this is _not_ a copy
   def hash
-    
     @hash
   end
 
   # creates a recursive copy of the internal hash
   def to_hash
-    
+
     h = hash.dup
     @hash.each do |name, node|
       h[name] = node.to_hash if node.respond_to? :to_hash
@@ -64,7 +63,7 @@ class Blobject
     # assignment in conditionals is usually a bad smell, here it helps minimize regex matching
     when (name = method[/^\w+$/, 0]) && params.length == 0
       # the call is an attribute reader
-      
+
       return self.class.new.freeze if frozen? and not @hash.has_key?(method)
       self.class.send :__define_attribute__, name
 
@@ -100,15 +99,11 @@ class Blobject
   end
 
   def respond_to? method
-    
-    return true  if self.methods.include?(method)
-    return false if ProhibitedNames.include?(method)
+    super || self.__respond_to__?(method)
+  end
 
-    method = method.to_s
-
-    [/^(\w+)=$/, /^(\w+)\?$/, /^\w+$/].any? do |r|
-      r.match(method)
-    end
+  def respond_to_missing?(method, *)
+    super || self.__respond_to__?(method)
   end
 
   # compares Blobjects to Blobjects or Hashes for equality
@@ -120,28 +115,21 @@ class Blobject
 
   # hash-like access to the Blobject's attributes
   def [] name
-    
+
     send name
   end
 
   # hash-like attribute setter
   def []= name, value
-    
+
     send "#{name.to_s}=", value
   end
-  
+
   # freeze a Blobject to prevent it being modified
   def freeze
-    @hash.freeze
+    self.class.send(:__freeze_r__, @hash) unless frozen?
     super
   end
-
-  # recursively freeze the Blobject include nest Blobjects in arrays
-  def freeze_r
-    self.class.send(:__freeze_r__, self)
-    freeze
-  end
-
 
   # for rails: `render json: blobject`
   def as_json *args
@@ -156,30 +144,30 @@ class Blobject
 
   # serialize the Blobject as a yaml string
   def to_yaml
-    
+
     as_yaml.to_yaml
   end
 
   # get a Blobject from a json string, if the yaml string describes an array, an array will be returned
   def self.from_json json
-    
+
     __blobjectify__(JSON.parse(json))
   end
 
   # get a Blobject from a yaml string, if the yaml string describes an array, an array will be returned
   def self.from_yaml yaml
-    
+
     __blobjectify__(YAML.load(yaml))
   end
 
-private
-# to avoid naming collisions private method names are prefixed and suffix with double unerscores (__)
+  protected
+  # to avoid naming collisions private method names are prefixed and suffix with double unerscores (__)
 
   # Used to tag and re-raise errors from a Blobject
   # Refer to "Tagging exceptions with modules" on p97 in Exceptional Ruby by Avdi Grimm
   # errors from this library can be handled with rescue Blobject::Error
   module Error; end
-  
+
   def __tag_and_raise__ e
     raise e
   rescue
@@ -187,29 +175,31 @@ private
     raise e
   end
 
+  def __respond_to__?(method)
+    return false if ProhibitedNames.include?(method)
+
+    method = method.to_s
+
+    [/^(\w+)=$/, /^(\w+)\?$/, /^\w+$/].any? do |r|
+      r.match(method)
+    end
+  end
+
   class << self
 
-  private
+    protected
 
     def __freeze_r__ object
-      
-      case object
-      when Array
-        return object.each do |e|
-          e.freeze
-          __freeze_r__(e)
-        end
-      when Hash
-        return object.each do |k, v|
+
+      if object.respond_to?(:each) && object.each.is_a?(Enumerator)
+        values = object.is_a?(Hash) ? object.values : object
+        values.each do |v|
           v.freeze
           __freeze_r__(v)
         end
-      when Blobject
-        object.freeze
-        __freeze_r__ object.hash
-      else
-        object.freeze
       end
+
+      object.freeze
     end
 
     def __blobjectify__ object
@@ -235,7 +225,7 @@ private
           begin
             value = self.class.send(:__blobjectify__, value) if value.is_a?(Hash) or value.is_a?(Array)
             @hash[name] = value
-          rescue  ex
+          rescue => ex
             __tag_and_raise__(ex)
           end
           @store_in_parent.call unless @store_in_parent.nil?
@@ -247,7 +237,7 @@ private
 
           value = @hash[name]
 
-          if value.nil? 
+          if value.nil?
             value = self.class.new
             @hash[name] = value unless frozen?
           end
@@ -259,7 +249,7 @@ private
       checker_name = (name.to_s + '?').to_sym
       unless methods.include? checker_name
         self.send :define_method, checker_name do
-          @hash.key?(name)
+          @hash[name] ? true : false
         end
       end
 

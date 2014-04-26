@@ -1,7 +1,4 @@
-$:.push File.expand_path('../lib', __FILE__)
-require 'debugger'
-require 'blobject'
-
-def reload!
-  load 'blobject.rb'
-end
+Pry.commands.alias_command 'c', 'continue'
+Pry.commands.alias_command 's', 'step'
+Pry.commands.alias_command 'n', 'next'
+Pry.commands.alias_command '...', 'whereami'
