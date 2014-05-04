@@ -1,6 +1,6 @@
-![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)    
+![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)
 
-Rdocs: [http://sjltaylor.github.com/blobject](http://sjltaylor.github.com/blobject)
+RDocs: [http://sjltaylor.github.com/blobject](http://sjltaylor.github.com/blobject)
 
 ## About
 
@@ -36,7 +36,7 @@ Blobject let's you do this (complete code listing, no predefined data structures
 
 
     data = Blobject.from_json HTTParty.get('https://raw.github.com/sjltaylor/blobject/master/spec/sample_data/sample3.json')
-    
+
     full_name = "#{data.calibration.staff.name.first}#{data.calibration.staff.name.middle_initial}#{data.calibration.staff.name.second}".capitalize
       => "Calibrator"
 
@@ -135,7 +135,7 @@ Consider a configuration object which contains credentials for a third-party api
       endpoint: 'http://services.thirdparty.net/api'
 
 With a hash, usage looks like this:
-    
+
     CONFIG[:third_party_api][:endpoint]
 
 With a Blobject, usage looks like this:
@@ -168,7 +168,7 @@ Blobjects can be used to easily build complex payloads.
     person = Blobject.new
 
     person.name = first: 'David', last: 'Platt'
-    
+
     person.address.tap do |address|
       address.street = "..."
       address.city   = "..."
@@ -268,4 +268,3 @@ Copyright (c) 2012 Sam Taylor. See LICENSE.txt for
 further details.
 
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
-

@@ -38,6 +38,11 @@ describe Blobject do
     assert !b.fish?, 'should not have assigned an empty blobject'
   end
 
+  it 'does not result in a graph containing empty blobjects when using checkers' do
+    b.fish.food?
+    assert !b.fish?, 'should not have assigned an empty blobject'
+  end
+
   it 'turns hashes into blobjects when assigning' do
 
     b.name = { christian: "Vinnie", surname: "Jones" }

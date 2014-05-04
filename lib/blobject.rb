@@ -237,9 +237,18 @@ class Blobject
 
           value = @hash[name]
 
-          if value.nil?
+          if value.nil? && !frozen?
             value = self.class.new
-            @hash[name] = value unless frozen?
+
+            # close the scope for storing call chain
+            parent          = self
+
+            store_in_parent = lambda do
+              parent.send "#{name}=", value
+              value.send :remove_instance_variable, :@store_in_parent
+            end
+
+            value.instance_variable_set :@store_in_parent, store_in_parent
           end
 
           value
