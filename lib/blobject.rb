@@ -223,7 +223,7 @@ class Blobject
       unless methods.include? setter_name
         self.send :define_method, setter_name do |value|
           begin
-            value = self.class.send(:__blobjectify__, value) if value.is_a?(Hash) or value.is_a?(Array)
+            value = self.class.send(:__blobjectify__, value)
             @hash[name] = value
           rescue => ex
             __tag_and_raise__(ex)
