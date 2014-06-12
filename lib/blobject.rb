@@ -11,8 +11,7 @@ class Blobject
 
   # pass an optional hash of values to preload
   # you can also pass a block, the new Blobject will be yield
-  def initialize hash = {}
-
+  def initialize hash={}
     @hash = Hash.new
 
     hash.each do |key, value|
@@ -34,7 +33,6 @@ class Blobject
 
   # delegates to the internal Hash
   def inspect
-
     @hash.inspect
   end
 
@@ -45,7 +43,6 @@ class Blobject
 
   # creates a recursive copy of the internal hash
   def to_hash
-
     h = hash.dup
     @hash.each do |name, node|
       h[name] = node.to_hash if node.respond_to? :to_hash
@@ -56,7 +53,6 @@ class Blobject
   # method_missing is only called the first time an attribute is used. successive calls use
   # memoized getters, setters and checkers
   def method_missing method, *params, &block
-
     __tag_and_raise__ NoMethodError.new(method) if ProhibitedNames.include?(method)
 
     case
@@ -115,20 +111,12 @@ class Blobject
 
   # hash-like access to the Blobject's attributes
   def [] name
-
     send name
   end
 
   # hash-like attribute setter
   def []= name, value
-
     send "#{name.to_s}=", value
-  end
-
-  # freeze a Blobject to prevent it being modified
-  def freeze
-    self.class.send(:__freeze_r__, @hash) unless frozen?
-    super
   end
 
   # for rails: `render json: blobject`
@@ -144,19 +132,16 @@ class Blobject
 
   # serialize the Blobject as a yaml string
   def to_yaml
-
     as_yaml.to_yaml
   end
 
   # get a Blobject from a json string, if the yaml string describes an array, an array will be returned
   def self.from_json json
-
     __blobjectify__(JSON.parse(json))
   end
 
   # get a Blobject from a yaml string, if the yaml string describes an array, an array will be returned
   def self.from_yaml yaml
-
     __blobjectify__(YAML.load(yaml))
   end
 
@@ -189,21 +174,7 @@ class Blobject
 
     protected
 
-    def __freeze_r__ object
-
-      if object.respond_to?(:each) && object.each.is_a?(Enumerator)
-        values = object.is_a?(Hash) ? object.values : object
-        values.each do |v|
-          v.freeze
-          __freeze_r__(v)
-        end
-      end
-
-      object.freeze
-    end
-
     def __blobjectify__ object
-
       array = object if object.is_a? Array
       hash  = object if object.is_a? Hash
 
@@ -213,7 +184,6 @@ class Blobject
     end
 
     def __define_attribute__ name
-
       __tag_and_raise__ NameError.new("invalid attribute name #{name}") unless name =~ /^\w+$/
       name = name.to_sym
 
