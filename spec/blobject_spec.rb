@@ -126,6 +126,10 @@ describe Blobject do
     it 'returns false for :to_ary because that method is not allowed' do
       refute Blobject.new.respond_to? :to_ary
     end
+
+    it 'accepts the include_all optional parameter' do
+      assert b.respond_to?(:name, false)
+    end
   end
 
   describe 'to_hash' do
