@@ -6,18 +6,18 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.8.1
+    &mdash; Documentation by YARD 0.8.7.6
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
   hasFrames = window.top.frames.main ? true : false;
   relpath = '';
-  framesUrl = "frames.html#!" + escape(window.location.href);
+  framesUrl = "frames.html#!file.README.html";
 </script>
 
 
@@ -61,44 +61,44 @@
 
     <iframe id="search_frame"></iframe>
 
-    <div id="content"><div id='filecontents'><p><img src="https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png" alt="">    </p>
+    <div id="content"><div id='filecontents'><p><img src="https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png" alt=""></p>
 
-<p>Rdocs: <a href="http://sjltaylor.github.com/blobject">http://sjltaylor.github.com/blobject</a></p>
+<p>RDocs: <a href="http://sjltaylor.github.com/blobject">http://sjltaylor.github.com/blobject</a></p>
 
 <h2>About</h2>
 
 <p>Consider the following json sample...</p>
 
-<pre class="code ruby"><code>{
-  &quot;device_id&quot;: 63354,
-  &quot;channel_no&quot;: 6,
-  &quot;interval_ms&quot;: 15000,
-  &quot;readings&quot;: [
-    {
-      &quot;value&quot;: 14232,
-      &quot;time&quot;: 1339880802
-    },
-    {
-      &quot;value&quot;: 14232,
-      &quot;time&quot;: 1339880817
-    }
-  ],
-  &quot;calibration&quot;: {
-    &quot;staff&quot;: {
-      &quot;name&quot;: {
-        &quot;first&quot;: &quot;Carl&quot;,
-        &quot;middle_initial&quot;: &quot;I&quot;,
-        &quot;second&quot;: &quot;Brator&quot;
-      }
-    },
-    &quot;last_calibration&quot;: &quot;2010-06-16T22:06:42+01:00&quot;
-  }
-}
+<pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>device_id</span><span class='label_end'>&quot;:</span> <span class='int'>63354</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>channel_no</span><span class='label_end'>&quot;:</span> <span class='int'>6</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>interval_ms</span><span class='label_end'>&quot;:</span> <span class='int'>15000</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>readings</span><span class='label_end'>&quot;:</span> <span class='lbracket'>[</span>
+    <span class='lbrace'>{</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>value</span><span class='label_end'>&quot;:</span> <span class='int'>14232</span><span class='comma'>,</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>time</span><span class='label_end'>&quot;:</span> <span class='int'>1339880802</span>
+    <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>value</span><span class='label_end'>&quot;:</span> <span class='int'>14232</span><span class='comma'>,</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>time</span><span class='label_end'>&quot;:</span> <span class='int'>1339880817</span>
+    <span class='rbrace'>}</span>
+  <span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>calibration</span><span class='label_end'>&quot;:</span> <span class='lbrace'>{</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>staff</span><span class='label_end'>&quot;:</span> <span class='lbrace'>{</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='label_end'>&quot;:</span> <span class='lbrace'>{</span>
+        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>first</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Carl</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>middle_initial</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>I</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>second</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Brator</span><span class='tstring_end'>&quot;</span></span>
+      <span class='rbrace'>}</span>
+    <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>last_calibration</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>2010-06-16T22:06:42+01:00</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rbrace'>}</span>
+<span class='rbrace'>}</span>
 </code></pre>
 
 <p>Blobject let&#39;s you do this (complete code listing, no predefined data structures):</p>
 
-<pre class="code ruby"><code>data = Blobject.from_json HTTParty.get('https://raw.github.com/sjltaylor/blobject/master/spec/sample_data/sample3.json')
+<pre class="code ruby"><code class="ruby">data = Blobject.from_json HTTParty.get(&#39;https://raw.github.com/sjltaylor/blobject/master/spec/sample_data/sample3.json&#39;)
 
 full_name = &quot;#{data.calibration.staff.name.first}#{data.calibration.staff.name.middle_initial}#{data.calibration.staff.name.second}&quot;.capitalize
   =&gt; &quot;Calibrator&quot;
@@ -110,7 +110,7 @@ last_reading = data.readings.last.value if data.readings?
 <p>Blobject is convenient to creating json payloads too.
 Blobjects are <em>freeform</em> which means you can do this...</p>
 
-<pre class="code ruby"><code><span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>Blobject</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>Blobject</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 
 <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>   <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Johnny</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_number'>number</span> <span class='op'>=</span> <span class='int'>316</span>
@@ -120,7 +120,7 @@ Blobjects are <em>freeform</em> which means you can do this...</p>
 
 <p>unlike <code>OpenStruct</code>, <code>Blobject</code>s can be arbitrarily <em>complex</em> which means you can do this...</p>
 
-<pre class="code ruby"><code>data = Blobject.new
+<pre class="code ruby"><code class="ruby">data = Blobject.new
   =&gt; {}
 
 data.name.first   = &quot;Johnny&quot;
@@ -145,7 +145,7 @@ data.my.object.with.deep.nested.members = &quot;happy place&quot;
 
 <p>You can test to see if a member is defined:</p>
 
-<pre class="code ruby"><code>data.something_here?
+<pre class="code ruby"><code class="ruby">data.something_here?
   =&gt; false
 data.name?
   =&gt; true
@@ -153,7 +153,7 @@ data.name?
 
 <p>You can use it like a hash</p>
 
-<pre class="code ruby"><code>data[:name]
+<pre class="code ruby"><code class="ruby">data[:name]
   =&gt; {:first=&gt;&quot;Johnny&quot;, :surname=&gt;&quot;Begood&quot;}
 
 data[:name][:first] = &quot;Jimmy&quot;; data[:name]
@@ -179,14 +179,14 @@ data.name == {:first=&gt;&quot;Jimmy&quot;, :surname=&gt;&quot;Begood&quot;}
 <ol>
 <li>Install the gem (ruby 1.9.2+ required): <code>sh &lt;(curl https://raw.github.com/sjltaylor/blobject/master/try_blobject.sh)</code></li>
 <li>Load data from an api...
-payload = Blobject.from<em>json HTTParty.get(&#39;<a href="https://raw.github.com/sjltaylor/blobject/master/spec/sample">https://raw.github.com/sjltaylor/blobject/master/spec/sample</a></em>data/sample3.json&#39;)</li>
+payload = Blobject.from_json HTTParty.get(&#39;<a href="https://raw.github.com/sjltaylor/blobject/master/spec/sample_data/sample3.json&#x27;">https://raw.github.com/sjltaylor/blobject/master/spec/sample_data/sample3.json&#39;</a>)</li>
 <li>Inspect it
 payload.calibration.staff.name
 =&gt; :middle_initial=&gt;&quot;I&quot;, :second=&gt;&quot;Brator&quot;</li>
 <li>Test for optional data members
-payload.channel<em>no?
+payload.channel_no?
   =&gt; true
-payload.something</em>that<em>is</em>not_there?
+payload.something_that_is_not_there?
   =&gt; false</li>
 <li>Draw your own payload
 mine = Blobject.new my: 123
@@ -198,37 +198,37 @@ mine.to_json
 
 <p>Consider a configuration object which contains credentials for a third-party api.</p>
 
-<pre class="code ruby"><code>third_party_api:
-  secret_key: 'S3CR3T'
-  endpoint: 'http://services.thirdparty.net/api'
+<pre class="code ruby"><code class="ruby">third_party_api:
+  secret_key: &#39;S3CR3T&#39;
+  endpoint: &#39;http://services.thirdparty.net/api&#39;
 </code></pre>
 
 <p>With a hash, usage looks like this:</p>
 
-<pre class="code ruby"><code><span class='const'>CONFIG</span><span class='lbracket'>[</span><span class='symbol'>:third_party_api</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:endpoint</span><span class='rbracket'>]</span>
+<pre class="code ruby"><code class="ruby"><span class='const'>CONFIG</span><span class='lbracket'>[</span><span class='symbol'>:third_party_api</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:endpoint</span><span class='rbracket'>]</span>
 </code></pre>
 
 <p>With a Blobject, usage looks like this:</p>
 
-<pre class="code ruby"><code><span class='const'>CONFIG</span><span class='period'>.</span><span class='id identifier rubyid_third_party_api'>third_party_api</span><span class='period'>.</span><span class='id identifier rubyid_endpoint'>endpoint</span>
+<pre class="code ruby"><code class="ruby"><span class='const'>CONFIG</span><span class='period'>.</span><span class='id identifier rubyid_third_party_api'>third_party_api</span><span class='period'>.</span><span class='id identifier rubyid_endpoint'>endpoint</span>
 </code></pre>
 
 <p>References to the endpoint are scattered throughout the codebase, then one day the endpoint is separated into its constituent parts to aide in testing and staging.</p>
 
-<pre class="code ruby"><code>third_party_api:
-  secret_key: 'S3CR3T'
-  protocol: 'http'
-  hostname: 'services.thirdparty.net'
-  path: '/api'
+<pre class="code ruby"><code class="ruby">third_party_api:
+  secret_key: &#39;S3CR3T&#39;
+  protocol: &#39;http&#39;
+  hostname: &#39;services.thirdparty.net&#39;
+  path: &#39;/api&#39;
 </code></pre>
 
 <p>Using a blobject we can easily avoid having to refactor our code...</p>
 
-<pre class="code ruby"><code><span class='const'>CONFIG</span> <span class='op'>=</span> <span class='const'>Blobject</span><span class='period'>.</span><span class='id identifier rubyid_from_yaml'>from_yaml</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>./config.yml</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+<pre class="code ruby"><code class="ruby"><span class='const'>CONFIG</span> <span class='op'>=</span> <span class='const'>Blobject</span><span class='period'>.</span><span class='id identifier rubyid_from_yaml'>from_yaml</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>./config.yml</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
 
 <span class='const'>CONFIG</span><span class='period'>.</span><span class='id identifier rubyid_third_party_api'>third_party_api</span><span class='period'>.</span><span class='id identifier rubyid_instance_eval'>instance_eval</span> <span class='kw'>do</span>
   <span class='kw'>def</span> <span class='id identifier rubyid_endpoint'>endpoint</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_protocol'>protocol</span><span class='rbrace'>}</span><span class='tstring_content'>://</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_hostname'>hostname</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_protocol'>protocol</span><span class='embexpr_end'>}</span><span class='tstring_content'>://</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_hostname'>hostname</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_path'>path</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
 <span class='kw'>end</span>
 </code></pre>
@@ -237,16 +237,16 @@ mine.to_json
 
 <p>Blobjects can be used to easily build complex payloads.</p>
 
-<pre class="code ruby"><code>person = Blobject.new
+<pre class="code ruby"><code class="ruby">person = Blobject.new
 
-person.name = first: 'David', last: 'Platt'
+person.name = first: &#39;David&#39;, last: &#39;Platt&#39;
 
 person.address.tap do |address|
   address.street = &quot;...&quot;
   address.city   = &quot;...&quot;
 end
 
-person.next_of_kin.address.city = '...'
+person.next_of_kin.address.city = &#39;...&#39;
 
 # after the payload is constructed it can be frozen to prevent modification
 person.freeze
@@ -254,24 +254,24 @@ person.freeze
 
 <p>A nice pattern in most cases is to use an initialization block...</p>
 
-<pre class="code ruby"><code>Blobject.new optional_hash_of_initial_data do |b|
+<pre class="code ruby"><code class="ruby">Blobject.new optional_hash_of_initial_data do |b|
   b.name = ...
 end.freeze
 </code></pre>
 
 <p>Suppose you receive a payload from an api which may or may not contain an address and city...</p>
 
-<pre class="code ruby"><code>payload = Blobject.from_json request[:payload]
+<pre class="code ruby"><code class="ruby">payload = Blobject.from_json request[:payload]
 
 # if the payload does have an address...
 city = payload.address.city
-  =&gt; 'Liverpool'
+  =&gt; &#39;Liverpool&#39;
 
 # if the payload does not have an address or city
 city = payload.address.city
   =&gt; nil
 # rather than request[:payload][:address][:city] which would raise
-# NoMethodError: undefined method `[]' for nil:NilClass
+# NoMethodError: undefined method `[]&#39; for nil:NilClass
 </code></pre>
 
 <p>Also, you don&#39;t need to concern yourself whether hash keys are symbols or strings.</p>
@@ -282,7 +282,7 @@ city = payload.address.city
 
 <p>see <code>/benchmarks</code></p>
 
-<pre class="code ruby"><code>ITERATIONS: 1000000
+<pre class="code ruby"><code class="ruby">ITERATIONS: 1000000
 
 
 BENCHMARK: assign
@@ -345,9 +345,9 @@ further details.</p>
 </div></div>
 
     <div id="footer">
-  Generated on Sun Jun 17 00:20:42 2012 by
+  Generated on Tue Dec 29 13:23:50 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.1 (ruby-1.9.3).
+  0.8.7.6 (ruby-2.2.3).
 </div>
 
   </body>
