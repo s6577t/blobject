@@ -1,5 +1,9 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)
 
+Blobjectis an experiment into using idosyncratic Ruby features to slop a Hash.
+
+![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
+
 RDocs: [http://sjltaylor.github.com/blobject](http://sjltaylor.github.com/blobject)
 
 ## About
@@ -32,7 +36,7 @@ Consider the following json sample...
       }
     }
 
-Blobject let's you do this (complete code listing, no predefined data structures):
+Blobject lets you do this (complete code listing, no predefined data structures):
 
 
     data = Blobject.from_json HTTParty.get('https://raw.github.com/sjltaylor/blobject/master/spec/sample_data/sample3.json')
@@ -44,7 +48,7 @@ Blobject let's you do this (complete code listing, no predefined data structures
       => 14232
 
 
-Blobject is convenient to creating json payloads too.
+Blobject is convenient for creating json payloads too.
 Blobjects are *freeform* which means you can do this...
 
     data = Blobject.new
@@ -241,7 +245,8 @@ A Blobject is three-four times slower than an equivalent Object.
 ## Limitations
 
 * will not work with basic objects unless #class and #freeze are implemented
-* cyclic blobject graphs result in infinite recursion StackOverflow
+* cyclic blobject graphs result in infinite recursion causing a stack overflow
+* imho, blobject's behaviour leads to too many surprises and a simpler more explicit is better
 * Ruby 1.8.7 is not supported. Testing rubies...
   * mri 1.9.3-p194
   * mri 1.9.2-p290
@@ -266,5 +271,3 @@ THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 Copyright (c) 2012 Sam Taylor. See LICENSE.txt for
 further details.
-
-![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
