@@ -6,18 +6,18 @@
 <title>
   Class: Blobject
   
-    &mdash; Documentation by YARD 0.8.1
+    &mdash; Documentation by YARD 0.8.7.6
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
   hasFrames = window.top.frames.main ? true : false;
   relpath = '';
-  framesUrl = "frames.html#!" + escape(window.location.href);
+  framesUrl = "frames.html#!Blobject.html";
 </script>
 
 
@@ -111,7 +111,17 @@
 <div class="tags">
   
 
-</div>
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Blobject/Error.html" title="Blobject::Error (module)">Error</a></span>
+    
+  
+    
+  
+</p>
+
   <h2>Constant Summary</h2>
   
     <dl class="constants">
@@ -119,7 +129,7 @@
         <dt id="ProhibitedNames-constant" class="">ProhibitedNames =
           <div class="docstring">
   <div class="discussion">
-    <p>filter :to<em>ary else Blobject#to</em>ary returns a
+    <p>filter :to_ary else Blobject#to_ary returns a
 blobject which is not cool, especially if you are puts.</p>
 
 
@@ -145,7 +155,7 @@ blobject which is not cool, especially if you are puts.</p>
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>0.3.8</span><span class='tstring_end'>'</span></span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0.5.0</span><span class='tstring_end'>&#39;</span></span></pre></dd>
       
     </dl>
   
@@ -337,52 +347,6 @@ blobject which is not cool, especially if you are puts.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#freeze-instance_method" title="#freeze (instance method)">- (Object) <strong>freeze</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>freeze a Blobject to prevent it being modified.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#freeze_r-instance_method" title="#freeze_r (instance method)">- (Object) <strong>freeze_r</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>recursively freeze the Blobject include nest Blobjects in arrays.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#hash-instance_method" title="#hash (instance method)">- (Object) <strong>hash</strong> </a>
     
 
@@ -422,8 +386,7 @@ blobject which is not cool, especially if you are puts.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>pass an optional hash of values to preload
-you can also pass a block, the new Blobject will be yield.</p>
+    <span class="summary_desc"><div class='inline'><p>pass an optional hash of values to preload you can also pass a block, the new Blobject will be yield.</p>
 </div></span>
   
 </li>
@@ -479,6 +442,28 @@ you can also pass a block, the new Blobject will be yield.</p>
   <span class="summary_signature">
     
       <a href="#respond_to%3F-instance_method" title="#respond_to? (instance method)">- (Boolean) <strong>respond_to?</strong>(method) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#respond_to_missing%3F-instance_method" title="#respond_to_missing? (instance method)">- (Boolean) <strong>respond_to_missing?</strong>(method) </a>
     
 
     
@@ -643,14 +628,12 @@ you can also pass a block, the new Blobject will be yield</p>
 24
 25
 26
-27
-28</pre>
+27</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 14</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_hash'>hash</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='ivar'>@hash</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 
   <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
@@ -703,6 +686,10 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
+55
+56
+57
+58
 59
 60
 61
@@ -739,25 +726,19 @@ memoized getters, setters and checkers</p>
 92
 93
 94
-95
-96
-97
-98
-99
-100</pre>
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span> <span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-
   <span class='id identifier rubyid___tag_and_raise__'>__tag_and_raise__</span> <span class='const'>NoMethodError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='const'>ProhibitedNames</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
 
   <span class='kw'>case</span>
   <span class='comment'># assignment in conditionals is usually a bad smell, here it helps minimize regex matching
 </span>  <span class='kw'>when</span> <span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='id identifier rubyid_method'>method</span><span class='lbracket'>[</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^\w+$</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span>
     <span class='comment'># the call is an attribute reader
-</span>    
+</span>
     <span class='kw'>return</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span> <span class='kw'>if</span> <span class='id identifier rubyid_frozen?'>frozen?</span> <span class='kw'>and</span> <span class='kw'>not</span> <span class='ivar'>@hash</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
     <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span> <span class='symbol'>:__define_attribute__</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span>
 
@@ -768,7 +749,7 @@ memoized getters, setters and checkers</p>
     <span class='id identifier rubyid_nested_blobject'>nested_blobject</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
 
     <span class='id identifier rubyid_store_in_parent'>store_in_parent</span> <span class='op'>=</span> <span class='id identifier rubyid_lambda'>lambda</span> <span class='kw'>do</span>
-      <span class='id identifier rubyid_parent'>parent</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_nested_blobject'>nested_blobject</span>
+      <span class='id identifier rubyid_parent'>parent</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_nested_blobject'>nested_blobject</span>
       <span class='id identifier rubyid_nested_blobject'>nested_blobject</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span> <span class='symbol'>:remove_instance_variable</span><span class='comma'>,</span> <span class='symbol'>:@store_in_parent</span>
     <span class='kw'>end</span>
 
@@ -828,16 +809,14 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
-164
-165
-166
-167</pre>
+139
+140
+141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 139</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span> <span class='id identifier rubyid_json'>json</span>
-  
   <span class='id identifier rubyid___blobjectify__'>__blobjectify__</span><span class='lparen'>(</span><span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_json'>json</span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -870,16 +849,14 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
-170
-171
-172
-173</pre>
+144
+145
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 144</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_from_yaml'>from_yaml</span> <span class='id identifier rubyid_yaml'>yaml</span>
-  
   <span class='id identifier rubyid___blobjectify__'>__blobjectify__</span><span class='lparen'>(</span><span class='const'>YAML</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_yaml'>yaml</span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -918,14 +895,14 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
-115
-116
-117
-118
-119</pre>
+106
+107
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 106</span>
 
 <span class='kw'>def</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span>
   <span class='kw'>return</span> <span class='ivar'>@hash</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_hash'>hash</span> <span class='kw'>if</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>&lt;=</span> <span class='const'>Blobject</span>
@@ -962,16 +939,14 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
-122
-123
-124
-125</pre>
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 113</span>
 
 <span class='kw'>def</span> <span class='op'>[]</span> <span class='id identifier rubyid_name'>name</span>
-  
   <span class='id identifier rubyid_send'>send</span> <span class='id identifier rubyid_name'>name</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1004,17 +979,15 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
-128
-129
-130
-131</pre>
+118
+119
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='op'>[]=</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span>
-  
-  <span class='id identifier rubyid_send'>send</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='id identifier rubyid_send'>send</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1046,13 +1019,13 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
-147
-148
-149
-150</pre>
+123
+124
+125
+126</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 147</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 123</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_as_json'>as_json</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_as_json'>as_json</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:as_json</span>
@@ -1101,99 +1074,15 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
+30
 31
-32
-33</pre>
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
   <span class='ivar'>@hash</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="freeze-instance_method">
-  
-    - (<tt>Object</tt>) <strong>freeze</strong> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>freeze a Blobject to prevent it being modified</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-134
-135
-136
-137</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 134</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_freeze'>freeze</span>
-  <span class='ivar'>@hash</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-  <span class='kw'>super</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="freeze_r-instance_method">
-  
-    - (<tt>Object</tt>) <strong>freeze_r</strong> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>recursively freeze the Blobject include nest Blobjects in arrays</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-140
-141
-142
-143</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 140</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_freeze_r'>freeze_r</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='symbol'>:__freeze_r__</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_freeze'>freeze</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1225,16 +1114,14 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
-42
-43
-44
-45</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_hash'>hash</span>
-  
   <span class='ivar'>@hash</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1267,16 +1154,14 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
+35
 36
-37
-38
-39</pre>
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
-  
   <span class='ivar'>@hash</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1321,31 +1206,67 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112</pre>
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='id identifier rubyid_method'>method</span>
+  <span class='kw'>super</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid___respond_to__?'>__respond_to__?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="respond_to_missing?-instance_method">
   
-  <span class='kw'>return</span> <span class='kw'>true</span>  <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_methods'>methods</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='const'>ProhibitedNames</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
+    - (<tt>Boolean</tt>) <strong>respond_to_missing?</strong>(method) 
+  
 
-  <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  
 
-  <span class='lbracket'>[</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^(\w+)=$</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^(\w+)\?$</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^\w+$</span><span class='regexp_end'>/</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span>
-    <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 101</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_respond_to_missing?'>respond_to_missing?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='op'>*</span><span class='rparen'>)</span>
+  <span class='kw'>super</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid___respond_to__?'>__respond_to__?</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1377,20 +1298,18 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
+45
+46
+47
 48
 49
 50
-51
-52
-53
-54
-55</pre>
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_hash'>to_hash</span>
-  
   <span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
   <span class='ivar'>@hash</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_node'>node</span><span class='op'>|</span>
     <span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_to_hash'>to_hash</span> <span class='kw'>if</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:to_hash</span>
@@ -1427,12 +1346,12 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
-153
-154
-155</pre>
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 153</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_json'>to_json</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span>
   <span class='id identifier rubyid_as_json'>as_json</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span>
@@ -1467,16 +1386,14 @@ memoized getters, setters and checkers</p>
       <pre class="lines">
 
 
-158
-159
-160
-161</pre>
+134
+135
+136</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 158</span>
+      <pre class="code"><span class="info file"># File 'lib/blobject.rb', line 134</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_yaml'>to_yaml</span>
-  
   <span class='id identifier rubyid_as_yaml'>as_yaml</span><span class='period'>.</span><span class='id identifier rubyid_to_yaml'>to_yaml</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1489,9 +1406,9 @@ memoized getters, setters and checkers</p>
 </div>
 
     <div id="footer">
-  Generated on Sun Jun 17 00:20:42 2012 by
+  Generated on Tue Dec 29 13:27:01 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.1 (ruby-1.9.3).
+  0.8.7.6 (ruby-2.2.3).
 </div>
 
   </body>
