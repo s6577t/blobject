@@ -1,6 +1,6 @@
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png)
 
-Blobjectis an experiment into using idosyncratic Ruby features to slop a Hash.
+Blobject is an experiment into using idosyncratic Ruby features to slop a Hash.
 
 ![](https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png)
 
