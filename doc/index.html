@@ -63,6 +63,10 @@
 
     <div id="content"><div id='filecontents'><p><img src="https://github.com/sjltaylor/blobject/raw/master/assets/blobject.png" alt=""></p>
 
+<p>Blobject is an experiment into using idosyncratic Ruby features to slop a Hash.</p>
+
+<p><img src="https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png" alt=""></p>
+
 <p>RDocs: <a href="http://sjltaylor.github.com/blobject">http://sjltaylor.github.com/blobject</a></p>
 
 <h2>About</h2>
@@ -96,7 +100,7 @@
 <span class='rbrace'>}</span>
 </code></pre>
 
-<p>Blobject let&#39;s you do this (complete code listing, no predefined data structures):</p>
+<p>Blobject lets you do this (complete code listing, no predefined data structures):</p>
 
 <pre class="code ruby"><code class="ruby">data = Blobject.from_json HTTParty.get(&#39;https://raw.github.com/sjltaylor/blobject/master/spec/sample_data/sample3.json&#39;)
 
@@ -107,7 +111,7 @@ last_reading = data.readings.last.value if data.readings?
   =&gt; 14232
 </code></pre>
 
-<p>Blobject is convenient to creating json payloads too.
+<p>Blobject is convenient for creating json payloads too.
 Blobjects are <em>freeform</em> which means you can do this...</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>Blobject</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -313,7 +317,8 @@ Hashie:     1.880000   0.000000   1.880000 (  1.921718)
 
 <ul>
 <li>will not work with basic objects unless #class and #freeze are implemented</li>
-<li>cyclic blobject graphs result in infinite recursion StackOverflow</li>
+<li>cyclic blobject graphs result in infinite recursion causing a stack overflow</li>
+<li>imho, blobject&#39;s behaviour leads to too many surprises and a simpler more explicit is better</li>
 <li>Ruby 1.8.7 is not supported. Testing rubies...
 
 <ul>
@@ -340,12 +345,10 @@ Hashie:     1.880000   0.000000   1.880000 (  1.921718)
 
 <p>Copyright (c) 2012 Sam Taylor. See LICENSE.txt for
 further details.</p>
-
-<p><img src="https://github.com/sjltaylor/blobject/raw/master/assets/blob_defn.png" alt=""></p>
 </div></div>
 
     <div id="footer">
-  Generated on Tue Dec 29 13:23:50 2015 by
+  Generated on Tue Dec 29 13:27:01 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.3).
 </div>
