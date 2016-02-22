@@ -94,7 +94,7 @@ class Blobject
     super
   end
 
-  def respond_to? method
+  def respond_to? method, include_all=false
     super || self.__respond_to__?(method)
   end
 
